@@ -1,0 +1,7 @@
+<?php
+
+// Only valid utf-8 chars αισϊ.
+function test()
+{
+
+}

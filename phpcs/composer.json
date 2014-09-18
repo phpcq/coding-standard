@@ -1,0 +1,41 @@
+{
+    "description": "contao community alliance phpcs ruleset",
+    "homepage": "http://c-c-a.org/",
+    "license": "BSD-2-Clause",
+    "authors": [
+        {
+            "name": "Christian Schiffler",
+            "email": "c.schiffler@cyberspectrum.de",
+            "homepage": "http://www.cyberspectrum.de",
+            "role": "Developer"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/contao-community-alliance/coding-standard/issues",
+        "irc": "irc://irc.freenode.org/contao.cca",
+        "source": "https://github.com/contao-community-alliance/coding-standard"
+    },
+    "require": {
+        "php": ">=5.3"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~3.7",
+        "squizlabs/php_codesniffer": "~1.0"
+    },
+    "autoload-dev": {
+        "classmap": [
+            "ContaoCommunityAlliance",
+            "tests/AllTests.php",
+            "tests/ContaoCommunityAlliance/AbstractSniffUnitTest.php",
+            "tests/ContaoCommunityAlliance/Tests/Commenting/BlockCommentUnitTest.php",
+            "tests/ContaoCommunityAlliance/Tests/Commenting/ClassCommentUnitTest.php",
+            "tests/ContaoCommunityAlliance/Tests/Commenting/FunctionCommentUnitTest.php",
+            "tests/ContaoCommunityAlliance/Tests/Commenting/VariableCommentUnitTest.php",
+            "tests/ContaoCommunityAlliance/Tests/Files/EncodingUtf8UnitTest.php",
+            "tests/ContaoCommunityAlliance/Tests/PHP/CommentedOutCodeUnitTest.php",
+            "tests/ContaoCommunityAlliance/Tests/Strings/UnnecessaryStringConcatUnitTest.php",
+            "tests/ContaoCommunityAlliance/Tests/WhiteSpace/WhitespaceAfterAsteriskUnitTest.php"
+        ]
+    },
+    "minimum-stability": "dev"
+}

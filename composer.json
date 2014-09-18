@@ -1,0 +1,28 @@
+{
+    "name": "contao-community-alliance/coding-standard",
+    "description": "contao community alliance coding standard",
+    "homepage": "http://c-c-a.org/",
+    "license": "BSD-2-Clause",
+    "authors": [
+        {
+            "name": "Christian Schiffler",
+            "email": "c.schiffler@cyberspectrum.de",
+            "homepage": "http://www.cyberspectrum.de",
+            "role": "Developer"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/contao-community-alliance/coding-standard/issues",
+        "irc": "irc://irc.freenode.org/contao.cca",
+        "source": "https://github.com/contao-community-alliance/coding-standard"
+    },
+    "require": {
+        "php": ">=5.3"
+    },
+    "suggest": {
+        "contao-community-alliance/build-system": "The Contao Community Alliance Build System (CCABS)"
+    },
+    "branch-alias": {
+        "dev-master": "1.0.x-dev"
+    }
+}

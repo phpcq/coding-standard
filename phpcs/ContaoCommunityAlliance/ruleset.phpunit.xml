@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ruleset name="ContaoCommunityAlliancePHPUnit">
+  <description>This coding standard includes only the custom rules of the Contao Community Alliance and is solely used for selftesting.</description>
+  <!-- Commenting -->
+  <rule ref="ContaoCommunityAlliance.Commenting.BlockComment" />
+  <rule ref="ContaoCommunityAlliance.Commenting.ClassComment" />
+  <rule ref="ContaoCommunityAlliance.Commenting.FunctionComment.IncorrectParamVarName" />
+  <rule ref="ContaoCommunityAlliance.Commenting.FunctionComment.SpacingAfterParams" />
+  <rule ref="ContaoCommunityAlliance.Commenting.FunctionComment.TypeHintMissing" />
+  <rule ref="ContaoCommunityAlliance.Files.EncodingUtf8" />
+  <!--  <rule ref="ContaoCommunityAlliance.PHP.CommentedOutCode" /> -->
+  <rule ref="ContaoCommunityAlliance.PHP.ForbiddenFunctions" />
+  <rule ref="ContaoCommunityAlliance.Strings.UnnecessaryStringConcat" />
+  <rule ref="ContaoCommunityAlliance.WhiteSpace.WhitespaceAfterAsterisk" />
+</ruleset>

@@ -1,0 +1,14 @@
+language: php
+php:
+    - "5.3"
+    - "5.4"
+    - "5.5"
+    - "5.6"
+
+install:
+    - cd phpcs && composer install --prefer-dist --dev
+    - cd phpmd && composer install --prefer-dist --dev
+
+script:
+    - cd phpcs && vendor/bin/phpunit
+    - cd phpcs && vendor/bin/phpcs --standard=ContaoCommunityAlliance/ruleset.phpunit.xml ContaoCommunityAlliance/Sniffs/
