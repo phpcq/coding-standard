@@ -10,5 +10,6 @@ install:
     - cd phpmd && composer install --prefer-dist --dev
 
 script:
-    - cd phpcs && vendor/bin/phpunit
-    - cd phpcs && vendor/bin/phpcs --standard=ContaoCommunityAlliance/ruleset.phpunit.xml ContaoCommunityAlliance/Sniffs/
+    - cd phpcs
+    - vendor/bin/phpunit
+    - vendor/bin/phpcs --standard=ContaoCommunityAlliance/ruleset.phpunit.xml ContaoCommunityAlliance/Sniffs/
