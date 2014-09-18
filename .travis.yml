@@ -7,9 +7,7 @@ php:
 
 install:
     - cd phpcs && composer install --prefer-dist --dev
-    - cd phpmd && composer install --prefer-dist --dev
 
 script:
-    - cd phpcs
     - vendor/bin/phpunit
     - vendor/bin/phpcs --standard=ContaoCommunityAlliance/ruleset.phpunit.xml ContaoCommunityAlliance/Sniffs/
