@@ -22,7 +22,9 @@
     "suggest": {
         "contao-community-alliance/build-system": "The Contao Community Alliance Build System (CCABS)"
     },
-    "branch-alias": {
-        "dev-master": "1.0.x-dev"
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        }
     }
 }
