@@ -685,11 +685,11 @@ class ContaoCommunityAlliance_Sniffs_Commenting_FunctionCommentSniff extends Squ
                         $suggestedTypeHint = '';
                         if (strpos($suggestedName, 'array') !== false) {
                             $suggestedTypeHint = 'array';
-                        } else if (strpos($suggestedName, 'callable') !== false) {
+                        } else if (strpos($suggestedName, 'callable') === 0) {
                             $suggestedTypeHint = 'callable';
-                        } else if (strpos($suggestedName, 'int') !== false) {
+                        } else if (strpos($suggestedName, 'int') === 0) {
                             $suggestedTypeHint = '';
-                        } else if (strpos($suggestedName, 'bool') !== false) {
+                        } else if (strpos($suggestedName, 'bool') === 0) {
                             $suggestedTypeHint = '';
                         } else if (in_array($typeName, PHP_CodeSniffer::$allowedTypes) === false) {
                             $suggestedTypeHint = $suggestedName;
