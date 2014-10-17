@@ -7,8 +7,9 @@
   <rule ref="ContaoCommunityAlliance.Commenting.FunctionComment.IncorrectParamVarName" />
   <rule ref="ContaoCommunityAlliance.Commenting.FunctionComment.SpacingAfterParams" />
   <rule ref="ContaoCommunityAlliance.Commenting.FunctionComment.TypeHintMissing" />
+  <rule ref="ContaoCommunityAlliance.Commenting.VariableComment" />
   <rule ref="ContaoCommunityAlliance.Files.EncodingUtf8" />
-  <!--  <rule ref="ContaoCommunityAlliance.PHP.CommentedOutCode" /> -->
+  <rule ref="ContaoCommunityAlliance.PHP.CommentedOutCode" />
   <rule ref="ContaoCommunityAlliance.PHP.ForbiddenFunctions" />
   <rule ref="ContaoCommunityAlliance.Strings.UnnecessaryStringConcat" />
   <rule ref="ContaoCommunityAlliance.WhiteSpace.WhitespaceAfterAsterisk" />
