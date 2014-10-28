@@ -73,7 +73,7 @@
 
   <!-- Formatting -->
   <rule ref="Generic.Formatting.MultipleStatementAlignment" />
-  <rule ref="Generic.Formatting.NoSpaceAfterCast" />
+  <rule ref="Generic.Formatting.SpaceAfterCast" />
   <rule ref="Squiz.Formatting.OperatorBracket" />
 
   <!-- Functions -->
