@@ -28,8 +28,8 @@ class ContaoCommunityAlliance_Sniffs_Commenting_BlockCommentSniff extends  Squiz
     {
         $tokens = $phpcsFile->getTokens();
 
-        // If it is an inline doc comment for type hinting, return.
-        if (substr($tokens[$stackPtr]['content'], 0, 8) === '/** @var') {
+        // If it is an inline doc comment for type hinting etc., return.
+        if (substr($tokens[$stackPtr]['content'], 0, 5) === '/** @') {
             return;
         }
 
