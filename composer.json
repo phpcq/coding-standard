@@ -1,26 +1,41 @@
 {
-    "name": "contao-community-alliance/coding-standard",
-    "description": "contao community alliance coding standard",
-    "homepage": "http://c-c-a.org/",
-    "license": "BSD-2-Clause",
+    "name": "phpcq/coding-standard",
+    "description": "PHP code quality project coding standard",
+    "homepage": "http://phpcq.org/",
+    "license": "BSD-3-Clause and MIT",
     "authors": [
         {
             "name": "Christian Schiffler",
             "email": "c.schiffler@cyberspectrum.de",
             "homepage": "http://www.cyberspectrum.de",
             "role": "Developer"
+        },
+        {
+            "name":"Tristan Lins",
+            "email":"tristan@lins.io",
+            "homepage":"https://tristan.lins.io",
+            "role":"Developer"
         }
     ],
     "support": {
-        "issues": "https://github.com/contao-community-alliance/coding-standard/issues",
-        "irc": "irc://irc.freenode.org/contao.cca",
-        "source": "https://github.com/contao-community-alliance/coding-standard"
+        "issues": "https://github.com/phpcq/coding-standard/issues",
+        "source": "https://github.com/phpcq/coding-standard",
+        "irc": "irc://irc.freenode.org/phpcq"
     },
     "require": {
         "php": ">=5.3"
     },
+    "require-dev": {
+        "squizlabs/php_codesniffer": "~1.0",
+        "phpunit/phpunit": "~3.7"
+    },
     "suggest": {
-        "contao-community-alliance/build-system": "The Contao Community Alliance Build System (CCABS)"
+        "phpcq/phpcq": "The PHP code quality project core tasks."
+    },
+    "autoload-dev": {
+        "psr-0": {
+            "PhpCodeQuality_Tests_": "tests/"
+        }
     },
     "extra": {
         "branch-alias": {

@@ -1,22 +1,22 @@
-[![Build Status](https://travis-ci.org/contao-community-alliance/coding-standard.svg?style=flat-square&label=stable build)](https://travis-ci.org/contao-community-alliance/coding-standard)
-[![Latest Version tagged](http://img.shields.io/github/tag/contao-community-alliance/coding-standard.svg?style=flat-square)](https://github.com/contao-community-alliance/coding-standard/tags)
-[![Latest Version on Packagist](http://img.shields.io/packagist/v/contao-community-alliance/coding-standard.svg?style=flat-square)](https://packagist.org/packages/contao-community-alliance/coding-standard)
-[![Installations via composer per month](http://img.shields.io/packagist/dm/contao-community-alliance/coding-standard.svg?style=flat-square)](https://packagist.org/packages/contao-community-alliance/coding-standard)
+[![Build Status](https://travis-ci.org/phpcq/coding-standard.svg?style=flat-square&label=stable build)](https://travis-ci.org/phpcq/coding-standard)
+[![Latest Version tagged](http://img.shields.io/github/tag/phpcq/coding-standard.svg?style=flat-square)](https://github.com/phpcq/coding-standard/tags)
+[![Latest Version on Packagist](http://img.shields.io/packagist/v/phpcq/coding-standard.svg?style=flat-square)](https://packagist.org/packages/phpcq/coding-standard)
+[![Installations via composer per month](http://img.shields.io/packagist/dm/phpcq/coding-standard.svg?style=flat-square)](https://packagist.org/packages/phpcq/coding-standard)
 
 Coding Standards
 ================
 
-This repository contains the Contao Community Alliance coding standard definitions and style checker rules.
+This repository contains the PHPCQ coding standard definitions and style checker rules.
 
 The rules are for [phpcs](https://github.com/squizlabs/PHP_CodeSniffer) and [phpmd](https://github.com/phpmd/phpmd).
 
 Usage
 -----
 
-The most convenient usage is to use via [CCABS](https://github.com/contao-community-alliance/build-system).
+The most convenient usage is to use via [phpcq/phpcq](https://github.com/phpcq/phpcq).
 Simply put the following into your projects `build.default.properties` file:
 
 ```
-phpcs.standard=${basedir}/vendor/contao-community-alliance/coding-standard/phpcs/ContaoCommunityAlliance/ruleset.xml
-phpmd.ruleset=${basedir}/vendor/contao-community-alliance/coding-standard/phpmd/ruleset.xml
+phpcs.standard=${basedir}/vendor/phpcq/coding-standard/phpcs/PHPCQ/ruleset.xml
+phpmd.ruleset=${basedir}/vendor/phpcq/coding-standard/phpmd/ruleset.xml
 ```

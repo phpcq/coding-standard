@@ -10,4 +10,4 @@ install:
 
 script:
     - vendor/bin/phpunit
-    - vendor/bin/phpcs --standard=ContaoCommunityAlliance/ruleset.phpunit.xml ContaoCommunityAlliance/Sniffs/
+    - vendor/bin/phpcs --standard=PHPCQ/ruleset.phpunit.xml PHPCQ/Sniffs/
