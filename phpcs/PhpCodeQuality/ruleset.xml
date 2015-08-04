@@ -51,6 +51,7 @@
     <severity>0</severity>
   </rule>
   <rule ref="PhpCodeQuality.Commenting.VariableComment" />
+  <rule ref="Generic.Commenting.DocComment" />
   <rule ref="Generic.Commenting.Fixme" />
   <rule ref="Generic.Commenting.Todo" />
   <rule ref="Squiz.Commenting.DocCommentAlignment" />
