@@ -2,7 +2,7 @@
 <ruleset name="PhpCodeQualityPHPUnit">
   <description>This coding standard includes only the custom rules of the PHP code quality project and is solely used for selftesting.</description>
   <arg value="v"/>
-  <arg name="report" value="diff"/>
+  <arg name="report" value="full"/>
   <!-- Commenting -->
   <rule ref="PhpCodeQuality.Commenting.BlockComment" />
   <rule ref="PhpCodeQuality.Commenting.ClassComment" />
