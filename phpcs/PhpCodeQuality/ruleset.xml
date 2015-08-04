@@ -26,7 +26,7 @@
   <rule ref="Generic.CodeAnalysis.UnnecessaryFinalModifier" />
 <!--  <rule ref="Generic.CodeAnalysis.UnusedFunctionParameter" /> We shift this over to phpmd. -->
   <rule ref="Generic.CodeAnalysis.UselessOverridingMethod" />
-  <rule ref="Squiz.CodeAnalysis.EmptyStatement" />
+  <rule ref="Generic.CodeAnalysis.EmptyStatement" />
 
   <!-- Commenting -->
   <rule ref="PhpCodeQuality.Commenting.BlockComment.FirstLineIndent">
