@@ -49,6 +49,13 @@ abstract class PhpCodeQuality_Tests_AbstractSniffUnitTest extends PHPUnit_Framew
         if (self::$phpcs === null) {
             self::$phpcs = new PHP_CodeSniffer();
         }
+
+        if (!array_key_exists('PHP_CODESNIFFER_SNIFF_CODES', $GLOBALS)) {
+            $GLOBALS['PHP_CODESNIFFER_SNIFF_CODES']   = array();
+        }
+        if (!array_key_exists('PHP_CODESNIFFER_FIXABLE_CODES', $GLOBALS)) {
+            $GLOBALS['PHP_CODESNIFFER_FIXABLE_CODES']   = array();
+        }
     }
 
     /**
@@ -98,7 +105,7 @@ abstract class PhpCodeQuality_Tests_AbstractSniffUnitTest extends PHPUnit_Framew
         foreach ($iterator as $file) {
             $path = $file->getPathname();
             if (substr($path, 0, strlen($testFileBase)) === $testFileBase) {
-                if ($path !== $testFileBase.'php') {
+                if ($path !== $testFileBase.'php' && substr($path, -5) !== 'fixed') {
                     $testFiles[] = $path;
                 }
             }
@@ -110,12 +117,15 @@ abstract class PhpCodeQuality_Tests_AbstractSniffUnitTest extends PHPUnit_Framew
         // src path
         $srcPath = dirname(dirname(dirname(__DIR__))) . DIRECTORY_SEPARATOR . 'phpcs';
 
-        self::$phpcs->process(array(), $srcPath . DIRECTORY_SEPARATOR . $standardName . DIRECTORY_SEPARATOR . 'ruleset.phpunit.xml', array($sniffCode));
+        self::$phpcs->initStandard($srcPath . DIRECTORY_SEPARATOR . $standardName . DIRECTORY_SEPARATOR . 'ruleset.phpunit.xml', array($sniffCode));
         self::$phpcs->setIgnorePatterns(array());
 
         $failureMessages = array();
         foreach ($testFiles as $testFile) {
+            $filename = basename($testFile);
             try {
+                $cliValues = $this->getCliValues($filename);
+                self::$phpcs->cli->setCommandLineValues($cliValues);
                 $phpcsFile = self::$phpcs->processFile($testFile);
             } catch (Exception $e) {
                 $this->fail('An unexpected exception has been caught: '.$e->getMessage());
@@ -123,13 +133,31 @@ abstract class PhpCodeQuality_Tests_AbstractSniffUnitTest extends PHPUnit_Framew
 
             $failures        = $this->generateFailureMessages($phpcsFile);
             $failureMessages = array_merge($failureMessages, $failures);
+
+            if ($phpcsFile->getFixableCount() > 0) {
+                // Attempt to fix the errors.
+                $phpcsFile->fixer->fixFile();
+                $fixable = $phpcsFile->getFixableCount();
+                if ($fixable > 0) {
+                    $failureMessages[] = "Failed to fix $fixable fixable violations in $filename";
+                }
+                // Check for a .fixed file to check for accuracy of fixes.
+                $fixedFile = $testFile.'.fixed';
+                if (file_exists($fixedFile) === true) {
+                    $diff = $phpcsFile->fixer->generateDiff($fixedFile);
+                    if (trim($diff) !== '') {
+                        $filename          = basename($testFile);
+                        $fixedFilename     = basename($fixedFile);
+                        $failureMessages[] = "Fixed version of $filename does not match expected version in $fixedFilename; the diff is\n$diff";
+                    }
+                }
+            }
         }
 
         if (empty($failureMessages) === false) {
             $this->fail(implode(PHP_EOL, $failureMessages));
         }
     }
-
 
     /**
      * Generate a list of test failures for a given sniffed file.
@@ -184,7 +212,16 @@ abstract class PhpCodeQuality_Tests_AbstractSniffUnitTest extends PHPUnit_Framew
 
                 $errorsTemp = array();
                 foreach ($errors as $foundError) {
-                    $errorsTemp[] = $foundError['message'];
+                    $errorsTemp[] = $foundError['message'].' ('.$foundError['source'].')';
+                    $source = $foundError['source'];
+                    if (in_array($source, $GLOBALS['PHP_CODESNIFFER_SNIFF_CODES']) === false) {
+                        $GLOBALS['PHP_CODESNIFFER_SNIFF_CODES'][] = $source;
+                    }
+                    if ($foundError['fixable'] === true
+                        && in_array($source, $GLOBALS['PHP_CODESNIFFER_FIXABLE_CODES']) === false
+                    ) {
+                        $GLOBALS['PHP_CODESNIFFER_FIXABLE_CODES'][] = $source;
+                    }
                 }
 
                 $allProblems[$line]['found_errors'] = array_merge($foundErrorsTemp, $errorsTemp);
@@ -230,7 +267,7 @@ abstract class PhpCodeQuality_Tests_AbstractSniffUnitTest extends PHPUnit_Framew
 
                 $warningsTemp = array();
                 foreach ($warnings as $warning) {
-                    $warningsTemp[] = $warning['message'];
+                    $warningsTemp[] = $warning['message'].' ('.$warning['source'].')';
                 }
 
                 $allProblems[$line]['found_warnings'] = array_merge($foundWarningsTemp, $warningsTemp);
@@ -331,14 +368,28 @@ abstract class PhpCodeQuality_Tests_AbstractSniffUnitTest extends PHPUnit_Framew
     }
 
     /**
+     * Get a list of CLI values to set before the file is tested.
+     *
+     * @param string $filename The name of the file being tested.
+     *
+     * @return array
+     */
+    public function getCliValues($filename)
+    {
+        return array();
+    }//end getCliValues()
+
+    /**
      * Returns the lines where errors should occur.
      *
      * The key of the array should represent the line number and the value
      * should represent the number of errors that should occur on that line.
      *
+     * @param string $filename The name of the file being tested.
+     *
      * @return array(int => int)
      */
-    protected abstract function getErrorList();
+    protected abstract function getErrorList($filename);
 
     /**
      * Returns the lines where warnings should occur.
@@ -346,7 +397,9 @@ abstract class PhpCodeQuality_Tests_AbstractSniffUnitTest extends PHPUnit_Framew
      * The key of the array should represent the line number and the value
      * should represent the number of warnings that should occur on that line.
      *
+     * @param string $filename The name of the file being tested.
+     *
      * @return array(int => int)
      */
-    protected abstract function getWarningList();
+    protected abstract function getWarningList($filename);
 }

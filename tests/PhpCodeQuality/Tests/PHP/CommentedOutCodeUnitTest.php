@@ -31,30 +31,16 @@
  */
 class PhpCodeQuality_Tests_PHP_CommentedOutCodeUnitTest extends PhpCodeQuality_Tests_AbstractSniffUnitTest
 {
-
-
     /**
-     * Returns the lines where errors should occur.
-     *
-     * The key of the array should represent the line number and the value
-     * should represent the number of errors that should occur on that line.
-     *
-     * @return array<int, int>
+     * {@inheritDoc}
      */
-    public function getErrorList()
+    public function getErrorList($testFile='CommentedOutCodeUnitTest.inc')
     {
         return array();
-
-    }//end getErrorList()
-
+    }
 
     /**
-     * Returns the lines where warnings should occur.
-     *
-     * The key of the array should represent the line number and the value
-     * should represent the number of warnings that should occur on that line.
-     *
-     * @return array<int, int>
+     * {@inheritDoc}
      */
     public function getWarningList($testFile='CommentedOutCodeUnitTest.inc')
     {
@@ -76,11 +62,6 @@ class PhpCodeQuality_Tests_PHP_CommentedOutCodeUnitTest extends PhpCodeQuality_T
         default:
             return array();
             break;
-        }//end switch
-
-    }//end getWarningList()
-
-
-}//end class
-
-?>
+        }
+    }
+}

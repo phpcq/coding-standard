@@ -32,14 +32,9 @@
 class PhpCodeQuality_Tests_Commenting_BlockCommentUnitTest extends PhpCodeQuality_Tests_AbstractSniffUnitTest
 {
     /**
-     * Returns the lines where errors should occur.
-     *
-     * The key of the array should represent the line number and the value
-     * should represent the number of errors that should occur on that line.
-     *
-     * @return array<int, int>
+     * {@inheritDoc}
      */
-    public function getErrorList()
+    public function getErrorList($testFile='BlockCommentUnitTest.inc')
     {
         $errors = array(
                    8   => 1,
@@ -82,24 +77,14 @@ class PhpCodeQuality_Tests_Commenting_BlockCommentUnitTest extends PhpCodeQualit
 
         return $errors;
 
-    }//end getErrorList()
-
+    }
 
     /**
-     * Returns the lines where warnings should occur.
-     *
-     * The key of the array should represent the line number and the value
-     * should represent the number of warnings that should occur on that line.
-     *
-     * @return array<int, int>
+     * {@inheritDoc}
      */
-    public function getWarningList()
+    public function getWarningList($testFile='BlockCommentUnitTest.inc')
     {
         return array();
 
-    }//end getWarningList()
-
-
-}//end class
-
-?>
+    }
+}
