@@ -42,6 +42,7 @@
     <severity>0</severity>
   </rule>
 
+  <rule ref="PhpCodeQuality.Commenting.FileComment" />
   <rule ref="PhpCodeQuality.Commenting.ClassComment" />
   <rule ref="PhpCodeQuality.Commenting.FunctionComment.IncorrectParamVarName" />
   <rule ref="PhpCodeQuality.Commenting.FunctionComment.SpacingAfterParams" />
