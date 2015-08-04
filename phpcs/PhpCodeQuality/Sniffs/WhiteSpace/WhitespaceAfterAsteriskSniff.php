@@ -42,7 +42,7 @@ class PhpCodeQuality_Sniffs_WhiteSpace_WhitespaceAfterAsteriskSniff implements P
      */
     public function register()
     {
-        return array(T_DOC_COMMENT, T_COMMENT);
+        return array(T_DOC_COMMENT, T_COMMENT, T_DOC_COMMENT_STRING);
     }
 
     /**
@@ -57,23 +57,47 @@ class PhpCodeQuality_Sniffs_WhiteSpace_WhitespaceAfterAsteriskSniff implements P
     public function process(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
     {
         $tokens  = $phpcsFile->getTokens();
-        $content = trim($tokens[$stackPtr]['content']);
+        $token   = $tokens[$stackPtr];
+        $content = $token['content'];
 
-        // We ignore empty lines in doc comment.
-        if (trim($content) == '*') {
+        // Check if the previous is an asterisk, if so => error.
+        if ($token['code'] === T_DOC_COMMENT_STRING) {
+            if ($tokens[$stackPtr - 1]['code'] === T_DOC_COMMENT_STAR) {
+                $fix = $phpcsFile->addFixableError(
+                    'Whitespace must be added after the asterisk in doc comments. Expected "* ' . $content .
+                    '" but "*' . $content . '" was found.',
+                    $stackPtr
+                );
+                if ($fix === true) {
+                    $phpcsFile->fixer->replaceToken($stackPtr, ' ' . $content);
+                }
+            }
             return;
         }
 
-        if ((strpos($content, '*') === 0)
-            && (strpos($content, ' ') != 1)
-            && (strpos($content, '/') != 1)
-            && (strpos($content, "\n") != 1)
+        $trimmed = ltrim($content);
+        // We ignore empty lines in doc comment.
+        if ($trimmed == '*') {
+            return;
+        }
+
+        if ((strpos($trimmed, '*') === 0)
+            && (strpos($trimmed, ' ') != 1)
+            && (strpos($trimmed, '/') != 1)
+            && (strpos($trimmed, "\n") != 1)
         ) {
-            $phpcsFile->addError(
-                'Whitespace must be added after the asterisk in doc comments. Expected "* ' . ltrim($content, '*') .
+            $asterisk = strpos($content, '*');
+            $prefix   = substr($content, 0, $asterisk+1) . ' ';
+            $fix      = $phpcsFile->addFixableError(
+                'Whitespace must be added after the asterisk in doc comments. Expected "' . $prefix . ltrim($trimmed, '*') .
                 '" but "' . $content . '" was found.',
                 $stackPtr
             );
+
+            if ($fix === true) {
+                $replacement = $prefix . ltrim($trimmed, '*');
+                $phpcsFile->fixer->replaceToken($stackPtr, $replacement);
+            }
         }
     }
 }
