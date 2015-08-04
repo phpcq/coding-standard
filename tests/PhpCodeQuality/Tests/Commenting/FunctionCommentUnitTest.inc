@@ -1,5 +1,5 @@
 <?php
-class PHP_CodeSniffer_File
+class PHP_CodeSniffer_Filetest
 {
 
     /**
