@@ -42,8 +42,9 @@ if (class_exists('PHP_CodeSniffer_CommentParser_MemberCommentParser', true) === 
  *  <li>There is a blank line between the description and the tags.</li>
  *  <li>Check the order, indentation and content of each tag.</li>
  * </ul>
+ *
+ * @SuppressWarnings(PHPMD.CamelCaseClassName)
  */
-
 class PhpCodeQuality_Sniffs_Commenting_VariableCommentSniff extends Squiz_Sniffs_Commenting_VariableCommentSniff
 {
     /**

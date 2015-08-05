@@ -39,6 +39,8 @@
  *  <li>There is a blank newline between the long and short description.</li>
  *  <li>There is a blank newline between the long description and tags.</li>
  * </ul>
+ *
+ * @SuppressWarnings(PHPMD.CamelCaseClassName)
  */
 class PhpCodeQuality_Sniffs_Commenting_FileCommentSniff extends PEAR_Sniffs_Commenting_FileCommentSniff
 {
@@ -101,6 +103,8 @@ class PhpCodeQuality_Sniffs_Commenting_FileCommentSniff extends PEAR_Sniffs_Comm
      * @param array                $tags      The tokens for these tags.
      *
      * @return void
+     *
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     protected function processPackage(PHP_CodeSniffer_File $phpcsFile, array $tags)
     {

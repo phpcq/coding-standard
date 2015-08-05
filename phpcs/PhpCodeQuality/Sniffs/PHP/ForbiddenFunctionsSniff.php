@@ -30,6 +30,8 @@ if (class_exists('Generic_Sniffs_PHP_ForbiddenFunctionsSniff', true) === false) 
 /**
  * Discourages the use of alias functions that are kept in PHP for compatibility with older versions.
  * Also disallows the usage of debug methods.
+ *
+ * @SuppressWarnings(PHPMD.CamelCaseClassName)
  */
 class PhpCodeQuality_Sniffs_PHP_ForbiddenFunctionsSniff extends Generic_Sniffs_PHP_ForbiddenFunctionsSniff
 {

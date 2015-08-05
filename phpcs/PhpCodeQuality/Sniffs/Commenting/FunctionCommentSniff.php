@@ -49,6 +49,8 @@
  * <li>allow "int" and "bool" as type hints.<li>
  * <li>not strip the "&" from parameters when passing values by reference</li>
  * </ul>
+ *
+ * @SuppressWarnings(PHPMD.CamelCaseClassName)
  */
 class PhpCodeQuality_Sniffs_Commenting_FunctionCommentSniff extends Squiz_Sniffs_Commenting_FunctionCommentSniff
 {

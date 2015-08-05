@@ -25,6 +25,8 @@
 
 /**
  * Checks that one whitespace is after an asterisk in block comments.
+ *
+ * @SuppressWarnings(PHPMD.CamelCaseClassName)
  */
 class PhpCodeQuality_Sniffs_WhiteSpace_WhitespaceAfterAsteriskSniff implements PHP_CodeSniffer_Sniff
 {

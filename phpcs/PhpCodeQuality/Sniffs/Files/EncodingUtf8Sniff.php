@@ -25,6 +25,8 @@
 
 /**
  * Verifies that the current file contains only valid UTF-8 content.
+ *
+ * @SuppressWarnings(PHPMD.CamelCaseClassName)
  */
 class PhpCodeQuality_Sniffs_Files_EncodingUtf8Sniff implements PHP_CodeSniffer_Sniff
 {

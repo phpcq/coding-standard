@@ -27,6 +27,8 @@
  * Checks that two strings are not concatenated together; suggests using one string instead.
  *
  * Allows concatenation to span over multiple lines and to have the php end token hack ('?' . '>') to work.
+ *
+ * @SuppressWarnings(PHPMD.CamelCaseClassName)
  */
 class PhpCodeQuality_Sniffs_Strings_UnnecessaryStringConcatSniff extends Generic_Sniffs_Strings_UnnecessaryStringConcatSniff
 {

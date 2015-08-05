@@ -39,6 +39,8 @@
  *  <li>There is a blank newline between the long and short description.</li>
  *  <li>There is a blank newline between the long description and tags.</li>
  * </ul>
+ *
+ * @SuppressWarnings(PHPMD.CamelCaseClassName)
  */
 class PhpCodeQuality_Sniffs_Commenting_ClassCommentSniff extends PEAR_Sniffs_Commenting_ClassCommentSniff
 {

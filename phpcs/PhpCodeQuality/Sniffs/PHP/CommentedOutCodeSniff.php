@@ -27,6 +27,8 @@
  * Squiz_Sniffs_PHP_CommentedOutCodeSniff.
  *
  * Warn about commented out code.
+ *
+ * @SuppressWarnings(PHPMD.CamelCaseClassName)
  */
 class PhpCodeQuality_Sniffs_PHP_CommentedOutCodeSniff extends Squiz_Sniffs_PHP_CommentedOutCodeSniff
 {
