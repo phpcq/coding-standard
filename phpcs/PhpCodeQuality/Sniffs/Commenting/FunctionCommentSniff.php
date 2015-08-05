@@ -106,6 +106,13 @@ class PhpCodeQuality_Sniffs_Commenting_FunctionCommentSniff extends Squiz_Sniffs
             return;
         }
 
+        $previous = PHP_CodeSniffer::$allowedTypes;
+
+        PHP_CodeSniffer::$allowedTypes[] = 'int';
+        PHP_CodeSniffer::$allowedTypes[] = 'bool';
+
         parent::processParams($phpcsFile, $stackPtr, $commentStart);
+
+        PHP_CodeSniffer::$allowedTypes = $previous;
     }
 }
