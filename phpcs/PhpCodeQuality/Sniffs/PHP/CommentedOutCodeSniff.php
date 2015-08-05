@@ -50,11 +50,6 @@ class PhpCodeQuality_Sniffs_PHP_CommentedOutCodeSniff extends Squiz_Sniffs_PHP_C
             return;
         }
 
-        // Ignore comments at the end of code blocks.
-        if (substr($tokens[$stackPtr]['content'], 0, 6) === '//end ') {
-            return;
-        }
-
         if ($phpcsFile->tokenizerType === 'PHP') {
             for ($i = $stackPtr; $i < $phpcsFile->numTokens; $i++) {
                 if ($tokens[$stackPtr]['code'] !== $tokens[$i]['code']) {
@@ -67,7 +62,7 @@ class PhpCodeQuality_Sniffs_PHP_CommentedOutCodeSniff extends Squiz_Sniffs_PHP_C
                 }
 
                 // Do not interpret inheritDoc as commented code.
-                if (strpos(strtolower($tokens[$i]['content']), '{@inheritdoc}') !== false) {
+                if (strpos(strtolower($tokens[$i]['content']), '@inheritdoc') !== false) {
                     return;
                 }
             }
