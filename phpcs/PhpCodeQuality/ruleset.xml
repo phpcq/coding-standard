@@ -17,6 +17,10 @@
   <rule ref="Generic.Classes.DuplicateClassName" />
   <rule ref="Squiz.Classes.ClassFileName" />
   <rule ref="Squiz.Classes.SelfMemberReference" />
+  <rule ref="Squiz.Classes.ValidClassName.NotCamelCaps">
+    <!-- already handled by phpmd. -->
+    <severity>0</severity>
+  </rule>
 
   <!-- CodeAnalysis -->
   <rule ref="Generic.CodeAnalysis.ForLoopShouldBeWhileLoop" />
@@ -24,7 +28,6 @@
   <rule ref="Generic.CodeAnalysis.JumbledIncrementer" />
   <rule ref="Generic.CodeAnalysis.UnconditionalIfStatement" />
   <rule ref="Generic.CodeAnalysis.UnnecessaryFinalModifier" />
-<!--  <rule ref="Generic.CodeAnalysis.UnusedFunctionParameter" /> We shift this over to phpmd. -->
   <rule ref="Generic.CodeAnalysis.UselessOverridingMethod" />
   <rule ref="Generic.CodeAnalysis.EmptyStatement" />
 
@@ -83,10 +86,6 @@
   <rule ref="Squiz.Functions.FunctionDuplicateArgument" />
   <rule ref="Squiz.Functions.GlobalFunction" />
 
-  <!-- Metrics -->
-  <!-- <rule ref="Generic.Metrics.CyclomaticComplexity" /> We shift this over to phpmd. -->
-  <!-- <rule ref="Generic.Metrics.NestingLevel" /> We shift this over to phpmd. -->
-
   <!-- NamingConventions -->
   <rule ref="Generic.NamingConventions.ConstructorName" />
   <rule ref="Squiz.NamingConventions.ValidVariableName.PrivateNoUnderscore">
@@ -121,7 +120,6 @@
   <rule ref="Squiz.Scope.MethodScope" />
   <rule ref="Squiz.Scope.MemberVarScope" />
   <rule ref="Squiz.Scope.StaticThisUsage" />
-  <!--  <rule ref="PhpCodeQuality.Scope.AlwaysReturn" />  We shift this over to phpmd.-->
 
   <!-- Strings -->
   <rule ref="PhpCodeQuality.Strings.UnnecessaryStringConcat" />
