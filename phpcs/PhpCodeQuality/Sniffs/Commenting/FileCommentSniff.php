@@ -93,4 +93,18 @@ class PhpCodeQuality_Sniffs_Commenting_FileCommentSniff extends PEAR_Sniffs_Comm
             'allow_multiple' => false,
         ),
     );
+
+    /**
+     * Process the package tag.
+     *
+     * @param PHP_CodeSniffer_File $phpcsFile The file being scanned.
+     * @param array                $tags      The tokens for these tags.
+     *
+     * @return void
+     */
+    protected function processPackage(PHP_CodeSniffer_File $phpcsFile, array $tags)
+    {
+        // No op - we do not check the package name as it should be the same as the github vendor/repository.
+        // Sadly we do know neither here.
+    }
 }
