@@ -46,6 +46,10 @@
   </rule>
 
   <rule ref="PhpCodeQuality.Commenting.FileComment" />
+  <rule ref="PhpCodeQuality.Commenting.FileComment.MissingVersion">
+    <!-- We do NOT want to enforce to annotate the php version as it will change too fast due to SemVer. -->
+    <severity>0</severity>
+  </rule>
   <rule ref="PhpCodeQuality.Commenting.ClassComment" />
   <rule ref="PhpCodeQuality.Commenting.FunctionComment.IncorrectParamVarName" />
   <rule ref="PhpCodeQuality.Commenting.FunctionComment.SpacingAfterParams" />
@@ -55,6 +59,10 @@
   </rule>
   <rule ref="PhpCodeQuality.Commenting.VariableComment" />
   <rule ref="Generic.Commenting.DocComment" />
+  <rule ref="Generic.Commenting.DocComment.ParamGroup">
+    <!-- We want to allow a line between parameters. -->
+    <severity>0</severity>
+  </rule>
   <rule ref="Generic.Commenting.Fixme" />
   <rule ref="Generic.Commenting.Todo" />
   <rule ref="Squiz.Commenting.DocCommentAlignment" />
