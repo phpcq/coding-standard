@@ -56,8 +56,8 @@ class PhpCodeQuality_Sniffs_Commenting_FunctionCommentSniff extends Squiz_Sniffs
      * Check if an php doc contains @inheritdoc.
      *
      * @param PHP_CodeSniffer_File $phpcsFile
-     * @param                      $stackPtr
-     * @param                      $commentStart
+     * @param int                  $stackPtr
+     * @param int                  $commentStart
      *
      * @return bool
      */
