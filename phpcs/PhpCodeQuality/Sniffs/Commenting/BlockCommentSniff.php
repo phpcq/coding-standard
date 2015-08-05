@@ -28,6 +28,8 @@
  *
  * This alters the check from Squiz_Sniffs_Commenting_BlockCommentSniff to ignore inline doc comments as we want to
  * allow constructs like: "@var ClassName $variable".
+ *
+ * @SuppressWarnings(PHPMD.CamelCaseClassName)
  */
 class PhpCodeQuality_Sniffs_Commenting_BlockCommentSniff extends Squiz_Sniffs_Commenting_BlockCommentSniff
 {

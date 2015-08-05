@@ -23,14 +23,6 @@
  * @filesource
  */
 
-if (class_exists('PHP_CodeSniffer_Standards_AbstractVariableSniff', true) === false) {
-    throw new PHP_CodeSniffer_Exception('Class PHP_CodeSniffer_Standards_AbstractVariableSniff not found');
-}
-
-if (class_exists('PHP_CodeSniffer_CommentParser_MemberCommentParser', true) === false) {
-    throw new PHP_CodeSniffer_Exception('Class PHP_CodeSniffer_CommentParser_MemberCommentParser not found');
-}
-
 /**
  * Parses and verifies the variable doc comment.
  *

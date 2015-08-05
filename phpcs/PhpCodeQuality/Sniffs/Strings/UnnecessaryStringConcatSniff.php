@@ -30,7 +30,9 @@
  *
  * @SuppressWarnings(PHPMD.CamelCaseClassName)
  */
+// @codingStandardsIgnoreStart
 class PhpCodeQuality_Sniffs_Strings_UnnecessaryStringConcatSniff extends Generic_Sniffs_Strings_UnnecessaryStringConcatSniff
+// @codingStandardsIgnoreEnd
 {
     /**
      * Processes this sniff, when one of its tokens is encountered.

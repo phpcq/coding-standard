@@ -23,10 +23,6 @@
  * @filesource
  */
 
-if (class_exists('Generic_Sniffs_PHP_ForbiddenFunctionsSniff', true) === false) {
-    throw new PHP_CodeSniffer_Exception('Class Generic_Sniffs_PHP_ForbiddenFunctionsSniff not found');
-}
-
 /**
  * Discourages the use of alias functions that are kept in PHP for compatibility with older versions.
  * Also disallows the usage of debug methods.
