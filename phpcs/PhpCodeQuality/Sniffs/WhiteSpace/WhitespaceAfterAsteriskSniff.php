@@ -64,7 +64,7 @@ class PhpCodeQuality_Sniffs_WhiteSpace_WhitespaceAfterAsteriskSniff implements P
 
         // Check if the previous is an asterisk, if so => error.
         if ($token['code'] === T_DOC_COMMENT_STRING) {
-            if ($tokens[$stackPtr - 1]['code'] === T_DOC_COMMENT_STAR) {
+            if ($tokens[($stackPtr - 1)]['code'] === T_DOC_COMMENT_STAR) {
                 $fix = $phpcsFile->addFixableError(
                     'Whitespace must be added after the asterisk in doc comments. Expected "* ' . $content .
                     '" but "*' . $content . '" was found.',
@@ -89,9 +89,10 @@ class PhpCodeQuality_Sniffs_WhiteSpace_WhitespaceAfterAsteriskSniff implements P
             && (strpos($trimmed, "\n") != 1)
         ) {
             $asterisk = strpos($content, '*');
-            $prefix   = substr($content, 0, $asterisk+1) . ' ';
+            $prefix   = substr($content, 0, ($asterisk + 1)) . ' ';
             $fix      = $phpcsFile->addFixableError(
-                'Whitespace must be added after the asterisk in doc comments. Expected "' . $prefix . ltrim($trimmed, '*') .
+                'Whitespace must be added after the asterisk in doc comments. Expected "' .
+                $prefix . ltrim($trimmed, '*') .
                 '" but "' . $content . '" was found.',
                 $stackPtr
             );
