@@ -32,11 +32,6 @@
     "suggest": {
         "phpcq/phpcq": "The PHP code quality project core tasks."
     },
-    "autoload-dev": {
-        "psr-0": {
-            "PhpCodeQuality_Tests_": "tests/"
-        }
-    },
     "extra": {
         "branch-alias": {
             "dev-develop": "2.x-dev"
