@@ -40,74 +40,102 @@
 class PhpCodeQuality_Sniffs_Commenting_VariableCommentSniff extends Squiz_Sniffs_Commenting_VariableCommentSniff
 {
     /**
-     * Process the var tag.
+     * Ensure the first line start with capital letter and ends with full stop.
      *
-     * @param int $commentStart The position in the stack where the comment started.
-     * @param int $commentEnd   The position in the stack where the comment ended.
+     * @param PHP_CodeSniffer_File $phpcsFile    The file being scanned.
+     * @param int                  $commentStart The position in the stack where the comment started.
+     * @param int                  $commentEnd   The position in the stack where the comment ended.
      *
      * @return void
      */
-    protected function processVar($commentStart, $commentEnd)
+    protected function checkShortComment(PHP_CodeSniffer_File $phpcsFile, $commentStart, $commentEnd)
     {
-        $var = $this->commentParser->getVar();
+        $tokens       = $phpcsFile->getTokens();
+        $shortToken   = $phpcsFile->findNext(T_DOC_COMMENT_STRING, $commentStart, $commentEnd);
+        $shortContent = $tokens[$shortToken];
 
-        if ($var !== null) {
-            $errorPos = ($commentStart + $var->getLine());
-            $index    = array_keys($this->commentParser->getTagOrders(), 'var');
+        // No content, only tag.
+        if ($tokens[$commentStart]['comment_tags'] && ($shortToken > $tokens[$commentStart]['comment_tags'][0])) {
+            return;
+        }
 
-            if (count($index) > 1) {
-                $error = 'Only 1 @var tag is allowed in variable comment';
-                $this->currentFile->addError($error, $errorPos, 'DuplicateVar');
-                return;
+        if ($shortContent['content'] !== ucfirst($shortContent['content'])) {
+            $fix = $phpcsFile->addFixableError(
+                'Variable comment must start with a capital letter "%s"',
+                $shortToken,
+                '',
+                array($shortContent['content'])
+            );
+            if ($fix === true) {
+                $phpcsFile->fixer->beginChangeset();
+                $phpcsFile->fixer->replaceToken($shortToken, ucfirst($shortContent['content']));
+                $phpcsFile->fixer->endChangeset();
             }
-
-            if ($index[0] !== 1) {
-                $error = 'The @var tag must be the first tag in a variable comment';
-                $this->currentFile->addError($error, $errorPos, 'VarOrder');
+        }
+        if ('.' !== substr($shortContent['content'], -1)) {
+            $fix = $phpcsFile->addFixableError(
+                'Variable comment must end with a full stop "%s"',
+                $shortToken,
+                '',
+                array($shortContent['content'])
+            );
+            if ($fix === true) {
+                $phpcsFile->fixer->beginChangeset();
+                $phpcsFile->fixer->replaceToken($shortToken, $shortContent['content'] . '.');
+                $phpcsFile->fixer->endChangeset();
             }
+        }
+    }
 
-            $content = $var->getContent();
-            if (empty($content) === true) {
-                $error = 'Var type missing for @var tag in variable comment';
-                $this->currentFile->addError($error, $errorPos, 'MissingVarType');
-                return;
-            } else {
-                $suggestedType = PHP_CodeSniffer::suggestType($content);
-                if ($suggestedType !== $content) {
-                    // Hotfix - somehow they do not like "int" and "bool".
-                    switch ($content) {
-                        case 'int':
-                            $suggestedType = 'int';
-                            break;
-                        case 'bool':
-                            $suggestedType = 'bool';
-                            break;
-                        default:
-                    }
-                }
+    /**
+     * Called to process class member vars.
+     *
+     * @param PHP_CodeSniffer_File $phpcsFile The file being scanned.
+     * @param int                  $stackPtr  The position of the current token in the stack passed in $tokens.
+     *
+     * @return void
+     */
+    public function processMemberVar(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
+    {
+        $tokens       = $phpcsFile->getTokens();
+        $commentToken = array(
+            T_COMMENT,
+            T_DOC_COMMENT_CLOSE_TAG,
+        );
 
-                if ($content !== $suggestedType) {
-                    $error = 'Expected "%s"; found "%s" for @var tag in variable comment';
-                    $data  = array(
-                              $suggestedType,
-                              $content,
-                             );
-                    $this->currentFile->addError($error, $errorPos, 'IncorrectVarType', $data);
-                }
-            }
+        $commentEnd = $phpcsFile->findPrevious($commentToken, $stackPtr);
+        if ($commentEnd === false) {
+            $phpcsFile->addError('Missing member variable doc comment', $stackPtr, 'Missing');
+            return;
+        }
 
-            $spacing = substr_count($var->getWhitespaceBeforeContent(), ' ');
-            if ($spacing !== 1) {
-                $error = '@var tag indented incorrectly; expected 1 space but found %s';
-                $data  = array($spacing);
-                $this->currentFile->addError($error, $errorPos, 'VarIndent', $data);
-            }
+        if ($tokens[$commentEnd]['code'] === T_COMMENT) {
+            return;
+        } elseif ($tokens[$commentEnd]['code'] !== T_DOC_COMMENT_CLOSE_TAG) {
+            return;
         } else {
-            $error = 'Missing @var tag in variable comment';
-            $this->currentFile->addError($error, $commentEnd, 'MissingVar');
-        }//end if
+            // Make sure the comment we have found belongs to us.
+            $commentFor = $phpcsFile->findNext(array(T_VARIABLE, T_CLASS, T_INTERFACE), ($commentEnd + 1));
+            if ($commentFor !== $stackPtr) {
+                return;
+            }
+        }
 
-    }//end processVar()
+        $commentStart = $tokens[$commentEnd]['comment_opener'];
+        $comment      = strtolower($phpcsFile->getTokensAsString($commentStart, ($commentEnd - $commentStart)));
+        // Accept inheriting of comments to be sufficient.
+        if (strpos($comment, '@inheritdoc') !== false) {
+            return;
+        }
 
-}//end class
-?>
+        // Add well known types phpcs does not know about.
+        $previous                        = PHP_CodeSniffer::$allowedTypes;
+        PHP_CodeSniffer::$allowedTypes[] = 'int';
+        PHP_CodeSniffer::$allowedTypes[] = 'bool';
+        parent::processMemberVar($phpcsFile, $stackPtr);
+
+        PHP_CodeSniffer::$allowedTypes = $previous;
+
+        $this->checkShortComment($phpcsFile, $commentStart, $commentEnd);
+    }
+}
