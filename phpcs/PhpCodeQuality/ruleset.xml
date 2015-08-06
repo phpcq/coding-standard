@@ -51,8 +51,7 @@
     <severity>0</severity>
   </rule>
   <rule ref="PhpCodeQuality.Commenting.ClassComment" />
-  <rule ref="PhpCodeQuality.Commenting.FunctionComment.IncorrectParamVarName" />
-  <rule ref="PhpCodeQuality.Commenting.FunctionComment.SpacingAfterParams" />
+  <rule ref="PhpCodeQuality.Commenting.FunctionComment" />
   <rule ref="PhpCodeQuality.Commenting.FunctionComment.TypeHintMissing">
     <!-- We do NOT want to enforce type hints everywhere. -->
     <severity>0</severity>
