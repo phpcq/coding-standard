@@ -74,8 +74,6 @@
   <rule ref="../TYPO3SniffPool/Sniffs/Commenting/SpaceAfterDoubleSlashSniff.php" />
 
   <!-- Control structures -->
-  <rule ref="../TYPO3SniffPool/Sniffs/ControlStructures/AlignedBreakStatementSniff.php" />
-  <rule ref="../TYPO3SniffPool/Sniffs/ControlStructures/ValidBreakStatementsInSwitchesSniff.php" />
   <rule ref="../TYPO3SniffPool/Sniffs/ControlStructures/ValidDefaultStatementsInSwitchesSniff.php" />
 
   <!-- Files -->
