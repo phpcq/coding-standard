@@ -63,4 +63,24 @@ class PHP_CodeSniffer_Filetest
     {
 
     }
+
+    /**
+     * We allow bool as type.
+     *
+     * @return int
+     */
+    public function returnint()
+    {
+        return 0;
+    }
+
+    /**
+     * We allow bool as type.
+     *
+     * @return bool
+     */
+    public function returnBool()
+    {
+        return false;
+    }
 }
