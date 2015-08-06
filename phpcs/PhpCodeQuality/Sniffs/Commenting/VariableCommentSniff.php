@@ -40,6 +40,35 @@
 class PhpCodeQuality_Sniffs_Commenting_VariableCommentSniff extends Squiz_Sniffs_Commenting_VariableCommentSniff
 {
     /**
+     * Add an error and automatically fix it if desired.
+     *
+     * @param PHP_CodeSniffer_File $phpcsFile  The file being scanned.
+     *
+     * @param string               $error      The error message.
+     *
+     * @param string               $code       A violation code unique to the sniff message.
+     *
+     * @param int                  $token      The token to replace.
+     *
+     * @param string               $newContent The new content for the token.
+     *
+     * @return void
+     */
+    protected function autoFix(PHP_CodeSniffer_File $phpcsFile, $error, $code, $token, $newContent)
+    {
+        $tokens = $phpcsFile->getTokens();
+        if ($tokens[$token]['content'] === $newContent) {
+            return;
+        }
+        $fix = $phpcsFile->addFixableError($error, $token, $code);
+        if ($fix === true) {
+            $phpcsFile->fixer->beginChangeset();
+            $phpcsFile->fixer->replaceToken($token, $newContent);
+            $phpcsFile->fixer->endChangeset();
+        }
+    }
+
+    /**
      * Ensure the first line start with capital letter and ends with full stop.
      *
      * @param PHP_CodeSniffer_File $phpcsFile    The file being scanned.
@@ -50,40 +79,49 @@ class PhpCodeQuality_Sniffs_Commenting_VariableCommentSniff extends Squiz_Sniffs
      */
     protected function checkShortComment(PHP_CodeSniffer_File $phpcsFile, $commentStart, $commentEnd)
     {
-        $tokens       = $phpcsFile->getTokens();
-        $shortToken   = $phpcsFile->findNext(T_DOC_COMMENT_STRING, $commentStart, $commentEnd);
+        $tokens     = $phpcsFile->getTokens();
+        $shortToken = $phpcsFile->findNext(T_DOC_COMMENT_STRING, $commentStart, $commentEnd);
+        if ($shortToken === false) {
+            return;
+        }
         $shortContent = $tokens[$shortToken];
 
+        // Check if short comment spans multiple lines.
+        // Account for the fact that a short description might cover multiple lines.
+        $shortEnd = $shortToken;
+        $stopScan = $tokens[$commentStart]['comment_tags'] ? $tokens[$commentStart]['comment_tags'][0] : $commentEnd;
+        for ($i = ($shortToken + 1); $i < $stopScan; $i++) {
+            if ($tokens[$i]['code'] === T_DOC_COMMENT_STRING) {
+                if ($tokens[$i]['line'] === ($tokens[$shortEnd]['line'] + 1)) {
+                    $phpcsFile->addError('Variable short comment must be a single line', $shortToken, 'MultiLineShort');
+                    return;
+                } else {
+                    break;
+                }
+            }
+        }
+
         // No content, only tag.
-        if ($tokens[$commentStart]['comment_tags'] && ($shortToken > $tokens[$commentStart]['comment_tags'][0])) {
+        if ($tokens[$commentStart]['comment_tags'] && ($shortToken >= $tokens[$commentStart]['comment_tags'][0])) {
             return;
         }
 
-        if ($shortContent['content'] !== ucfirst($shortContent['content'])) {
-            $fix = $phpcsFile->addFixableError(
-                'Variable comment must start with a capital letter "%s"',
-                $shortToken,
-                '',
-                array($shortContent['content'])
-            );
-            if ($fix === true) {
-                $phpcsFile->fixer->beginChangeset();
-                $phpcsFile->fixer->replaceToken($shortToken, ucfirst($shortContent['content']));
-                $phpcsFile->fixer->endChangeset();
-            }
-        }
+        $this->autoFix(
+            $phpcsFile,
+            'Variable comment must start with a capital letter',
+            'ShortCapitalLetter',
+            $shortToken,
+            ucfirst($shortContent['content'])
+        );
+
         if ('.' !== substr($shortContent['content'], -1)) {
-            $fix = $phpcsFile->addFixableError(
-                'Variable comment must end with a full stop "%s"',
+            $this->autoFix(
+                $phpcsFile,
+                'Variable comment must end with a full stop',
+                'ShortFullStop',
                 $shortToken,
-                '',
-                array($shortContent['content'])
+                $shortContent['content'] . '.'
             );
-            if ($fix === true) {
-                $phpcsFile->fixer->beginChangeset();
-                $phpcsFile->fixer->replaceToken($shortToken, $shortContent['content'] . '.');
-                $phpcsFile->fixer->endChangeset();
-            }
         }
     }
 
@@ -109,16 +147,18 @@ class PhpCodeQuality_Sniffs_Commenting_VariableCommentSniff extends Squiz_Sniffs
             return;
         }
 
+        // Make sure the comment we have found belongs to us.
+        $commentFor = $phpcsFile->findNext(array(T_VARIABLE, T_CLASS, T_INTERFACE, T_FUNCTION), ($commentEnd + 1));
+        if ($commentFor !== $stackPtr) {
+            $phpcsFile->addError('Missing member variable doc comment', $stackPtr, 'Missing');
+            return;
+        }
+
         if ($tokens[$commentEnd]['code'] === T_COMMENT) {
+            $phpcsFile->addError('Member variable doc comment must be doc block', $commentEnd, 'NotDocBlock');
             return;
         } elseif ($tokens[$commentEnd]['code'] !== T_DOC_COMMENT_CLOSE_TAG) {
             return;
-        } else {
-            // Make sure the comment we have found belongs to us.
-            $commentFor = $phpcsFile->findNext(array(T_VARIABLE, T_CLASS, T_INTERFACE), ($commentEnd + 1));
-            if ($commentFor !== $stackPtr) {
-                return;
-            }
         }
 
         $commentStart = $tokens[$commentEnd]['comment_opener'];
