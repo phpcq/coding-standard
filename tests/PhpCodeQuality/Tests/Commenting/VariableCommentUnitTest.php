@@ -18,8 +18,8 @@
  * @author     Tristan Lins <tristan@lins.io>
  * @copyright  2006-2015 Squiz Pty Ltd (ABN 77 084 670 600),
  *             2014-2015 Christian Schiffler <c.schiffler@cyberspectrum.de>, Tristan Lins <tristan@lins.io>
- * @link       https://github.com/phpcq/coding-standard
  * @license    https://github.com/phpcq/coding-standard/blob/master/LICENSE.BSD-3-CLAUSE BSD-3-Clause
+ * @link       https://github.com/phpcq/coding-standard
  * @filesource
  */
 
@@ -30,48 +30,33 @@ class PhpCodeQuality_Tests_Commenting_VariableCommentUnitTest extends PhpCodeQua
 {
     /**
      * {@inheritDoc}
+     *
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
-    public function getErrorList($testFile='VariableCommentUnitTest.inc')
+    public function getErrorList($testFile = 'VariableCommentUnitTest.inc')
     {
         return array(
-                6   => 1,
-                8   => 1,
-                21  => 1,
-                24  => 1,
-                28  => 1,
-                38  => 1,
-                41  => 1,
-                53  => 1,
-                56  => 1,
-                63  => 1,
-                64  => 1,
-                69  => 2,
-                73  => 1,
-                81  => 1,
-                82  => 1,
-                84  => 1,
-                90  => 1,
-                92  => 1,
-                128 => 1,
-                145 => 1,
-                153 => 1,
-                158 => 1,
-                159 => 1,
-                163 => 1,
-                178 => 1,
-                180 => 1,
-                184 => 1,
-               );
-
-    }//end getErrorList()
+            4   => 1,
+            7   => 1,
+            21  => 1,
+            25  => 1,
+            28  => 1,
+            31  => 1,
+            40  => 1,
+            46  => 1,
+            55  => 1,
+            91  => 1,
+        );
+    }
 
     /**
      * {@inheritDoc}
+     *
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
-    public function getWarningList($testFile='VariableCommentUnitTest.inc')
+    public function getWarningList($testFile = 'VariableCommentUnitTest.inc')
     {
         return array(
-                93 => 1,
                );
 
     }
