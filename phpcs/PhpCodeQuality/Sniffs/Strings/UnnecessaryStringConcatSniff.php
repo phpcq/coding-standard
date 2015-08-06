@@ -42,6 +42,9 @@ class PhpCodeQuality_Sniffs_Strings_UnnecessaryStringConcatSniff extends Generic
      *                                        in the stack passed in $tokens.
      *
      * @return void
+     *
+     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+     * @SuppressWarnings(PHPMD.NPathComplexity)
      */
     public function process(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
     {

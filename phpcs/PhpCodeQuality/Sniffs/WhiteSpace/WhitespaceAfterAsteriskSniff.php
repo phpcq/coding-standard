@@ -55,6 +55,8 @@ class PhpCodeQuality_Sniffs_WhiteSpace_WhitespaceAfterAsteriskSniff implements P
      *                                        the stack passed in $tokens.
      *
      * @return void
+     *
+     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      */
     public function process(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
     {

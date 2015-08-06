@@ -76,6 +76,8 @@ class PhpCodeQuality_Sniffs_Commenting_VariableCommentSniff extends Squiz_Sniffs
      * @param int                  $commentEnd   The position in the stack where the comment ended.
      *
      * @return void
+     *
+     * @SuppressWarnings(PHPMD.NPathComplexity)
      */
     protected function checkShortComment(PHP_CodeSniffer_File $phpcsFile, $commentStart, $commentEnd)
     {
