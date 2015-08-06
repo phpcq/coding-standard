@@ -1,7 +1,6 @@
 <?php
 class PHP_CodeSniffer_Filetest
 {
-
     /**
      * A simple function comment.
      *
@@ -18,9 +17,9 @@ class PHP_CodeSniffer_Filetest
     {
         return $stackPtr;
 
-    }//end _functionCall()
+    }
 
-    //
+    // @inheritdoc
     // Sample function comment
     //
     //
@@ -28,227 +27,40 @@ class PHP_CodeSniffer_Filetest
     public function invalidCommentStyle()
     {
 
-    }//end invalidCommentStyle()
-
-
-    /**
-     *
-     *
-     * A simple function comment
-     *
-     *
-     * Long description with extra blank line before and after
-     *
-     *
-     * @return void
-     */
-    public function extraDescriptionNewlines()
-    {
-
-    }//end extraDescriptionNewlines()
-
-
-    /**
-     * A simple function comment.
-     * @return void
-     */
-    public function missingNewlinesBeforeTags()
-    {
-
-    }//end missingNewlinesBeforeTags()
-
-
-    /**
-     * Access tag should not be treated as a long description.
-     *
-     * @access public
-     * @return void
-     */
-    public function accessTag()
-    {
-
-    }//end accessTag()
-
-    /**
-     * Constructor.
-     *
-     * No return tag.
-     */
-    function PHP_CodeSniffer_File()
-    {
-        return;
     }
 
 
     /**
-     * Destructor.
+     * {@inheritdoc}
      *
-     * No return tag too
+     * This method is extending from the parent class and therefore we do not need any param desc here.
      */
-    function _PHP_CodeSniffer_File()
+    public function someInheritedMethod($stackPtr, $depth=1, $index)
     {
-        return;
+        return $stackPtr;
     }
 
-
     /**
-     * Destructor PHP5.
-     */
-    function __destruct()
-    {
-        return;
-    }
-
-
-    function missingComment()
-    {
-        return;
-    }
-
-
-    /**
-     * No return tag and trailing empty line.
+     * We allow int as type.
      *
-     */
-    public function noReturn($one)
-    {
-
-    }//end noReturn()
-
-
-    /**
-     * Param not immediate.
-     *
-     * @return
-     * @param   int   $threeSpaces
-     * @param int     $superfluous
-     * @param missing
-     * @param
-     */
-    public function missingDescroption($threeSpaces)
-    {
-
-    }//end missingDescroption()
-
-
-    /**
-     * Param not immediate.
-     *
-     * @param int      $one   Comment.
-     * @param int      $two   Comment.
-     * @param string   $three Comment.
+     * @param int $myInt The int.
      *
      * @return void
      */
-    public function oneSpaceAfterLongestVar($one, $two, $three)
+    public function intParam($myInt)
     {
 
-    }//end oneSpaceAfterLongestVar()
+    }
 
-
-}//end class
-
-
-/**
- * A simple function comment.
- *
- * @param string $str The string passed in by reference
- *
- * @return void
- */
-public function functionOutsideClass(&$str)
-{
-    return;
-}//end functionOutsideClass()
-
-
-function missingCommentOutsideClass()
-{
-    return;
-}//end missingCommentOutsideClass()
-
-
-?><?php
-function tagBeforeComment()
-{
-    return;
-}//end tagBeforeComment()
-
-
-/**
- * No return tag and trailing blanks.
- *
- *
- *
- */
-public function noReturnOutsideClass()
-{
-
-}//end noReturnOutsideClass()
-
-
-/**
- * Missing param comment.
- *
- * @param int $one Comment.
- *
- * @return void
- * @fine  Unknown tag
- */
-public function missingTwoParamComment($one, $two, $three)
-{
-
-}//end missingTwoParamComment()
-
-
-/**
- *
- */
-function emptyFunctionDocComment()
-{
-}//end emptyFunctionDocComment()
-
-
-/**
- * Test function missing return statment.
- *
- * @param string $arg1 An argument.
- *
- * @access public
- * @return bool
- */
-function myFunction($arg1) {}
-
-
-/**
- * Test function.
- *
- * @param string $arg1 An argument
- *
- * @access public
- * @return bool
- */
-
-echo $blah;
-
-function myFunction($arg1) {}
-
-/**
- * Test function.
- *
- * @access public
- * @return boolean
- * @throws MyException
- * @throws MyException When I feel like it.
- */
-function myFunction() {}
-
-class MyClass() {
     /**
-     * An abstract function.
+     * We allow bool as type.
      *
-     * @return string[]
+     * @param bool $myBool The int.
+     *
+     * @return void
      */
-    abstract final protected function myFunction();
+    public function boolParam($myBool)
+    {
+
+    }
 }
-?>

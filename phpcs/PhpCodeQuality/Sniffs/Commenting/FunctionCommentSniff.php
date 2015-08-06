@@ -67,6 +67,7 @@ class PhpCodeQuality_Sniffs_Commenting_FunctionCommentSniff extends Squiz_Sniffs
     {
         $tokens  = $phpcsFile->getTokens();
         $comment = strtolower($phpcsFile->getTokensAsString($commentStart, $tokens[$commentStart]['comment_closer']));
+
         // Accept inheriting of comments to be sufficient.
         return (strpos($comment, '@inheritdoc') !== false);
     }

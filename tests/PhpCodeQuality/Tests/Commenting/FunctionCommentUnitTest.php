@@ -30,50 +30,29 @@ class PhpCodeQuality_Tests_Commenting_FunctionCommentUnitTest extends PhpCodeQua
 {
     /**
      * {@inheritDoc}
+     *
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
-    public function getErrorList($testFile='FunctionCommentUnitTest.inc')
+    public function getErrorList($testFile = 'FunctionCommentUnitTest.inc')
     {
         return array(
-                 8  => 1,
-                10  => 2,
-                12  => 2,
-                13  => 2,
-                14  => 1,
-                15  => 1,
-                28  => 1,
-                35  => 2,
-                38  => 1,
-                41  => 1,
-                53  => 1,
-                103 => 1,
-                109 => 1,
-                112 => 2,
-                122 => 1,
-                123 => 3,
-                124 => 3,
-                125 => 4,
-                126 => 6,
-                139 => 1,
-                155 => 1,
-                165 => 1,
-                172 => 1,
-                183 => 2,
-                193 => 2,
-                204 => 1,
-                218 => 1,
-                234 => 1,
-                240 => 1,
-                241 => 1,
-               );
-
+            4   => 1,
+            9   => 2,
+            11  => 1,
+            12  => 1,
+            13  => 1,
+            14  => 1,
+            27  => 1,
+        );
     }
 
     /**
      * {@inheritDoc}
+     *
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
-    public function getWarningList($testFile='FunctionCommentUnitTest.inc')
+    public function getWarningList($testFile = 'FunctionCommentUnitTest.inc')
     {
         return array();
-
     }
 }
