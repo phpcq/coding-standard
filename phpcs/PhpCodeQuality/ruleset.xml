@@ -111,7 +111,7 @@
   <rule ref="Squiz.Operators.ValidLogicalOperators" />
 
   <!-- PHP -->
-  <rule ref="PhpCodeQuality.PHP.CommentedOutCode" />
+  <rule ref="Squiz.PHP.CommentedOutCode" />
   <rule ref="PhpCodeQuality.PHP.ForbiddenFunctions" />
   <rule ref="Generic.PHP.DeprecatedFunctions" />
   <rule ref="Generic.PHP.ForbiddenFunctions" />
