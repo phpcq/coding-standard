@@ -15,6 +15,8 @@
 
 /**
  * Ensures doc blocks follow basic formatting.
+ *
+ * @SuppressWarnings(PHPMD.CamelCaseClassName)
  */
 class PhpCodeQuality_Sniffs_Commenting_DocCommentSniff extends Generic_Sniffs_Commenting_DocCommentSniff
 {
