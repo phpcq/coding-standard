@@ -14,8 +14,8 @@
  * @author     Christian Schiffler <c.schiffler@cyberspectrum.de>
  * @author     Tristan Lins <tristan@lins.io>
  * @copyright  2014-2015 Christian Schiffler <c.schiffler@cyberspectrum.de>, Tristan Lins <tristan@lins.io>
- * @link       https://github.com/phpcq/coding-standard
  * @license    https://github.com/phpcq/coding-standard/blob/master/LICENSE.MIT MIT
+ * @link       https://github.com/phpcq/coding-standard
  * @filesource
  */
 
@@ -38,6 +38,8 @@ class PhpCodeQuality_CodeSnifferTestSuite
      * Add all PHP_CodeSniffer test suites into a single test suite.
      *
      * @return PHPUnit_Framework_TestSuite
+     *
+     * @SuppressWarnings(PHPMD.UnusedLocalVariable)
      */
     public static function suite()
     {
@@ -47,25 +49,28 @@ class PhpCodeQuality_CodeSnifferTestSuite
         // This is individual to each standard as they could be symlinked in.
         $baseDir  = __DIR__;
         $iterator = new RecursiveDirectoryIterator(__DIR__ . '/PhpCodeQuality/Tests');
-        $iterator = new RecursiveCallbackFilterIterator($iterator, function(SplFileInfo $file, $pathname, RecursiveIterator $iterator) {
-            if ($iterator->hasChildren()) {
+        $iterator = new RecursiveCallbackFilterIterator(
+            $iterator,
+            function (SplFileInfo $file, $pathname, RecursiveIterator $iterator) {
+                if ($iterator->hasChildren()) {
+                    return true;
+                }
+
+                if (!$file->isFile()) {
+                    return false;
+                }
+
+                if (!preg_match('~^[^\.].+\.php$~', $file->getBasename())) {
+                    return false;
+                }
+
+                if (preg_match('~^Abstract~', $file->getBasename())) {
+                    return false;
+                }
+
                 return true;
             }
-
-            if (!$file->isFile()) {
-                return false;
-            }
-
-            if (!preg_match('~^[^\.].+\.php$~', $file->getBasename())) {
-                return false;
-            }
-
-            if (preg_match('~^Abstract~', $file->getBasename())) {
-                return false;
-            }
-
-            return true;
-        });
+        );
         $iterator = new RecursiveIteratorIterator($iterator);
 
         foreach ($iterator as $file) {
