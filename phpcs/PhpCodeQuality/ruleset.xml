@@ -61,8 +61,8 @@
     <severity>0</severity>
   </rule>
   <rule ref="PhpCodeQuality.Commenting.VariableComment" />
-  <rule ref="Generic.Commenting.DocComment" />
-  <rule ref="Generic.Commenting.DocComment.ParamGroup">
+  <rule ref="PhpCodeQuality.Commenting.DocComment" />
+  <rule ref="PhpCodeQuality.Commenting.DocComment.ParamGroup">
     <!-- We want to allow a line between parameters. -->
     <severity>0</severity>
   </rule>
