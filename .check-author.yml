@@ -9,6 +9,7 @@ copy-left:
     - phpcs/PhpCodeQuality/Sniffs/Commenting/FileCommentSniff.php
     - phpcs/PhpCodeQuality/Sniffs/Commenting/FunctionCommentSniff.php
     - phpcs/PhpCodeQuality/Sniffs/Commenting/VariableCommentSniff.php
+    - phpcs/PhpCodeQuality/Sniffs/Commenting/DocCommentSniff.php
     - phpcs/PhpCodeQuality/Sniffs/Files/EncodingUtf8Sniff.php
     - phpcs/PhpCodeQuality/Sniffs/PHP/CommentedOutCodeSniff.php
     - phpcs/PhpCodeQuality/Sniffs/PHP/ForbiddenFunctionsSniff.php
