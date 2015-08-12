@@ -26,9 +26,9 @@ class VariableCommentUnitTest
 
     /**
      * Short comment that spans multiple
-     * lines also var type is missing
+     * lines
      *
-     * @var
+     * @var string
      */
      public $singleLineFullStopShortComment = '';
 
@@ -48,6 +48,13 @@ class VariableCommentUnitTest
      * @var     string
      */
      public $noFullStop = '';
+
+    /**
+     * No type
+     *
+     * @var
+     */
+     public $noType = '';
 
     /**
      *

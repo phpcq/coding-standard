@@ -41,11 +41,11 @@ class PhpCodeQuality_Tests_Commenting_VariableCommentUnitTest extends PhpCodeQua
             21  => 1,
             25  => 1,
             28  => 1,
-            31  => 1,
             40  => 1,
             46  => 1,
             55  => 1,
-            91  => 1,
+            62  => 1,
+            98  => 1,
         );
     }
 
