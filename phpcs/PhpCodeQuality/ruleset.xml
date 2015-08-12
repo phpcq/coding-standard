@@ -73,6 +73,19 @@
   <rule ref="Squiz.Commenting.FunctionCommentThrowTag" />
   <rule ref="Squiz.Commenting.PostStatementComment" />
   <rule ref="Squiz.Commenting.InlineComment" />
+  <rule ref="Squiz.Commenting.InlineComment.DocBlock">
+    <!-- Allow doc blocks due to /** @var Class $var */ -->
+    <severity>0</severity>
+  </rule>
+  <rule ref="Squiz.Commenting.InlineComment.NotCapital">
+    <!-- Allow inline comments to start with lower case letters. -->
+    <severity>0</severity>
+  </rule>
+  <rule ref="Squiz.Commenting.InlineComment.InvalidEndChar">
+    <!-- Allow inline comments to end with alternative characters. -->
+    <severity>0</severity>
+  </rule>
+
   <rule ref="../TYPO3SniffPool/Sniffs/Commenting/DoubleSlashCommentsInNewLineSniff.php" /><!-- candidate for removal (xtra) -->
   <rule ref="../TYPO3SniffPool/Sniffs/Commenting/SpaceAfterDoubleSlashSniff.php" />
 
