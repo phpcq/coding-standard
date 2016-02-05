@@ -60,7 +60,7 @@
     <!-- We do NOT want to enforce type hints everywhere. -->
     <severity>0</severity>
   </rule>
-  <rule ref="Squiz.Commenting.FunctionComment.ScalarTypeHintMissing">
+  <rule ref="PhpCodeQuality.Commenting.FunctionComment.ScalarTypeHintMissing">
     <!-- We do NOT want to enforce scalar type hints everywhere as we also support PHP <7.0. -->
     <severity>0</severity>
   </rule>
