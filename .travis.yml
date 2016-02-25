@@ -1,13 +1,20 @@
 language: php
+
 php:
-    - "5.3"
-    - "5.4"
-    - "5.5"
-    - "5.6"
+  - "5.3"
+  - "5.4"
+  - "5.5"
+  - "5.6"
+  - "7.0"
+
+sudo: false
 
 install:
-    - cd phpcs && composer install --prefer-dist --dev
+  - travis_retry composer self-update && composer --version
+  - travis_retry composer install --prefer-dist --dev --no-interaction
 
-script:
-    - vendor/bin/phpunit
-    - vendor/bin/phpcs --standard=PHPCQ/ruleset.phpunit.xml PHPCQ/Sniffs/
+script: ant -keep-going
+
+# Hack to make things work again - we can not use a shallow repository.
+git:
+  depth: 2147483647

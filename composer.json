@@ -23,11 +23,11 @@
         "irc": "irc://irc.freenode.org/phpcq"
     },
     "require": {
-        "php": ">=5.3"
+        "php": ">=5.3",
+        "squizlabs/php_codesniffer": "~2.0"
     },
     "require-dev": {
-        "squizlabs/php_codesniffer": "~1.0",
-        "phpunit/phpunit": "~3.7"
+        "phpcq/all-tasks": "~1.1"
     },
     "suggest": {
         "phpcq/phpcq": "The PHP code quality project core tasks."
@@ -39,7 +39,9 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-develop": "1.x-dev"
+            "dev-master": "2.x-dev"
         }
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

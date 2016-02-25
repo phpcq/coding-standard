@@ -18,8 +18,8 @@
  * @author     Tristan Lins <tristan@lins.io>
  * @copyright  2006-2015 Squiz Pty Ltd (ABN 77 084 670 600),
  *             2014-2015 Christian Schiffler <c.schiffler@cyberspectrum.de>, Tristan Lins <tristan@lins.io>
- * @link       https://github.com/phpcq/coding-standard
  * @license    https://github.com/phpcq/coding-standard/blob/master/LICENSE.BSD-3-CLAUSE BSD-3-Clause
+ * @link       https://github.com/phpcq/coding-standard
  * @filesource
  */
 
@@ -28,51 +28,24 @@
  */
 class PhpCodeQuality_Tests_Commenting_ClassCommentUnitTest extends PhpCodeQuality_Tests_AbstractSniffUnitTest
 {
-
-
     /**
-     * Returns the lines where errors should occur.
+     * {@inheritDoc}
      *
-     * The key of the array should represent the line number and the value
-     * should represent the number of errors that should occur on that line.
-     *
-     * @return array<int, int>
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
-    public function getErrorList()
+    public function getErrorList($testFile = 'ClassCommentUnitTest.inc')
     {
-        return array(
-                4   => 1,
-                15  => 1,
-                22  => 2,
-                25  => 1,
-                28  => 1,
-                45  => 1,
-                59  => 1,
-                82  => 1,
-                90  => 1,
-                100 => 1,
-                113 => 1,
-                136 => 1,
-               );
-
-    }//end getErrorList()
-
+        return array();
+    }
 
     /**
-     * Returns the lines where warnings should occur.
+     * {@inheritDoc}
      *
-     * The key of the array should represent the line number and the value
-     * should represent the number of warnings that should occur on that line.
-     *
-     * @return array<int, int>
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
-    public function getWarningList()
+    public function getWarningList($testFile = 'ClassCommentUnitTest.inc')
     {
         return array();
 
-    }//end getWarningList()
-
-
-}//end class
-
-?>
+    }
+}

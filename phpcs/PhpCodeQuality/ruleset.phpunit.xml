@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ruleset name="PhpCodeQualityPHPUnit">
   <description>This coding standard includes only the custom rules of the PHP code quality project and is solely used for selftesting.</description>
-  <!-- Commenting -->
-  <rule ref="PhpCodeQuality.Commenting.BlockComment" />
-  <rule ref="PhpCodeQuality.Commenting.ClassComment" />
-  <rule ref="PhpCodeQuality.Commenting.FunctionComment.IncorrectParamVarName" />
-  <rule ref="PhpCodeQuality.Commenting.FunctionComment.SpacingAfterParams" />
-  <rule ref="PhpCodeQuality.Commenting.FunctionComment.TypeHintMissing" />
-  <rule ref="PhpCodeQuality.Commenting.VariableComment" />
-  <rule ref="PhpCodeQuality.Files.EncodingUtf8" />
-  <rule ref="PhpCodeQuality.PHP.CommentedOutCode" />
-  <rule ref="PhpCodeQuality.PHP.ForbiddenFunctions" />
-  <rule ref="PhpCodeQuality.Strings.UnnecessaryStringConcat" />
-  <rule ref="PhpCodeQuality.WhiteSpace.WhitespaceAfterAsterisk" />
+  <arg value="v"/>
+  <arg name="report" value="checkstyle"/>
+  <rule ref="PhpCodeQuality"/>
+  <rule ref="Squiz.Classes.ClassFileName.NoMatch">
+    <!-- Sadly the class names of sniffs are fixed in phpcs. -->
+    <severity>0</severity>
+  </rule>
+  <rule ref="PSR1.Classes.ClassDeclaration.MissingNamespace">
+    <!-- Sadly the classes of sniffs are in the root namespace. -->
+    <severity>0</severity>
+  </rule>
+  <rule ref="Squiz.Classes.ValidClassName.NotCamelCaps">
+    <!-- Sadly the classes of sniffs are also not camel cased. -->
+    <severity>0</severity>
+  </rule>
 </ruleset>

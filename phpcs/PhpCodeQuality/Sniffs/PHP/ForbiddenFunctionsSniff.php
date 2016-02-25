@@ -18,18 +18,16 @@
  * @author     Tristan Lins <tristan@lins.io>
  * @copyright  2006-2015 Squiz Pty Ltd (ABN 77 084 670 600),
  *             2014-2015 Christian Schiffler <c.schiffler@cyberspectrum.de>, Tristan Lins <tristan@lins.io>
- * @link       https://github.com/phpcq/coding-standard
  * @license    https://github.com/phpcq/coding-standard/blob/master/LICENSE.BSD-3-CLAUSE BSD-3-Clause
+ * @link       https://github.com/phpcq/coding-standard
  * @filesource
  */
-
-if (class_exists('Generic_Sniffs_PHP_ForbiddenFunctionsSniff', true) === false) {
-    throw new PHP_CodeSniffer_Exception('Class Generic_Sniffs_PHP_ForbiddenFunctionsSniff not found');
-}
 
 /**
  * Discourages the use of alias functions that are kept in PHP for compatibility with older versions.
  * Also disallows the usage of debug methods.
+ *
+ * @SuppressWarnings(PHPMD.CamelCaseClassName)
  */
 class PhpCodeQuality_Sniffs_PHP_ForbiddenFunctionsSniff extends Generic_Sniffs_PHP_ForbiddenFunctionsSniff
 {
@@ -41,7 +39,7 @@ class PhpCodeQuality_Sniffs_PHP_ForbiddenFunctionsSniff extends Generic_Sniffs_P
      *
      * @var array(string => string|null)
      */
-    protected $forbiddenFunctions = array(
+    public $forbiddenFunctions = array(
         'sizeof'          => 'count',
         'delete'          => 'unset',
         'print'           => 'echo',

@@ -18,8 +18,8 @@
  * @author     Tristan Lins <tristan@lins.io>
  * @copyright  2006-2015 Squiz Pty Ltd (ABN 77 084 670 600),
  *             2014-2015 Christian Schiffler <c.schiffler@cyberspectrum.de>, Tristan Lins <tristan@lins.io>
- * @link       https://github.com/phpcq/coding-standard
  * @license    https://github.com/phpcq/coding-standard/blob/master/LICENSE.BSD-3-CLAUSE BSD-3-Clause
+ * @link       https://github.com/phpcq/coding-standard
  * @filesource
  */
 
@@ -27,8 +27,12 @@
  * Checks that two strings are not concatenated together; suggests using one string instead.
  *
  * Allows concatenation to span over multiple lines and to have the php end token hack ('?' . '>') to work.
+ *
+ * @SuppressWarnings(PHPMD.CamelCaseClassName)
  */
+// @codingStandardsIgnoreStart
 class PhpCodeQuality_Sniffs_Strings_UnnecessaryStringConcatSniff extends Generic_Sniffs_Strings_UnnecessaryStringConcatSniff
+// @codingStandardsIgnoreEnd
 {
     /**
      * Processes this sniff, when one of its tokens is encountered.
@@ -38,6 +42,9 @@ class PhpCodeQuality_Sniffs_Strings_UnnecessaryStringConcatSniff extends Generic
      *                                        in the stack passed in $tokens.
      *
      * @return void
+     *
+     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+     * @SuppressWarnings(PHPMD.NPathComplexity)
      */
     public function process(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
     {
@@ -67,9 +74,7 @@ class PhpCodeQuality_Sniffs_Strings_UnnecessaryStringConcatSniff extends Generic
         }
 
         $stringTokens = PHP_CodeSniffer_Tokens::$stringTokens;
-        if (in_array($tokens[$prev]['code'], $stringTokens) === true
-            && in_array($tokens[$next]['code'], $stringTokens) === true
-        ) {
+        if (in_array($tokens[$prev]['code'], $stringTokens) && in_array($tokens[$next]['code'], $stringTokens)) {
             if ($tokens[$prev]['content'][0] === $tokens[$next]['content'][0]) {
                 // Before we throw an error for PHP, allow strings to be
                 // combined if they would have < and ? next to each other because

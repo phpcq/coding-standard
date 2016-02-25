@@ -18,13 +18,15 @@
  * @author     Tristan Lins <tristan@lins.io>
  * @copyright  2006-2015 Squiz Pty Ltd (ABN 77 084 670 600),
  *             2014-2015 Christian Schiffler <c.schiffler@cyberspectrum.de>, Tristan Lins <tristan@lins.io>
- * @link       https://github.com/phpcq/coding-standard
  * @license    https://github.com/phpcq/coding-standard/blob/master/LICENSE.BSD-3-CLAUSE BSD-3-Clause
+ * @link       https://github.com/phpcq/coding-standard
  * @filesource
  */
 
 /**
  * Verifies that the current file contains only valid UTF-8 content.
+ *
+ * @SuppressWarnings(PHPMD.CamelCaseClassName)
  */
 class PhpCodeQuality_Sniffs_Files_EncodingUtf8Sniff implements PHP_CodeSniffer_Sniff
 {

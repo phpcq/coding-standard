@@ -1,62 +1,11 @@
 <?php
-define('OK', 1);
-
-class No_Comment
-{
-
-}//end class
-
-
-//
-// Sample class comment
-//
-//
-//
-class Invalid_Comment_Style1
-{
-
-}//end class
-
 
 /**
- *
- *
- * Sample class comment
- *
- *
- * Long description with extra blank line before and after
- *
- *
- * @category  PHP
- * @package   PHP_CodeSniffer
- * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2014 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
- * @link      http://pear.php.net/package/PHP_CodeSniffer
+ * Mandatory file comment.
  */
-class Extra_Description_Newlines
-{
-
-}//end class
-
 
 /**
- * Sample class comment.
- * @category  PHP
- * @package   PHP_CodeSniffer
- * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2014 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
- * @link      http://pear.php.net/package/PHP_CodeSniffer
- */
-class Missing_Newlines_Before_Tags
-{
-
-}//end class
-
-
-/**
- * Simple class comment without fullstop
+ * Simple class comment with many tags but we ignore them.
  *
  * @category   _wrong_category
  * @package    PHP_CodeSniffer
@@ -79,41 +28,8 @@ class Missing_Newlines_Before_Tags
  */
 class Checking_Tags
 {
-    class Sub_Class {
-
-    }//end class
-
 
 }//end class
-
-
-/**
- *
- *
- */
-class Empty_Class_Doc
-{
-
-}//end class
-
-
-/**
- *
- *
- */
-interface Empty_Interface_Doc
-{
-
-}//end interface
-
-/*
- * This is an improper comment as it is no doc block.
- *
- */
-interface Empty_Interface_Doc2
-{
-
-}//end interface
 
 /**
  * {@inheritdoc}
@@ -122,23 +38,3 @@ class InheritDocClass implements SomeInterface
 {
 
 }
-
-/**
- * This is the extra long short description which is wrapping over two lines
- * and still has to have a full stop at it's end.
- */
-class LongShortDescription implements SomeInterface
-{
-
-}
-
-/**
- * This is the extra long short description which is wrapping over two lines
- * and still has to have a full stop at it's end which here is omitted
- */
-class LongShortDescriptionWithoutFullStop implements SomeInterface
-{
-
-}
-
-?>

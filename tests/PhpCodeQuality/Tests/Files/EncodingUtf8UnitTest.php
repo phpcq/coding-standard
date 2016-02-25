@@ -29,16 +29,9 @@
 class PhpCodeQuality_Tests_Files_EncodingUtf8UnitTest extends PhpCodeQuality_Tests_AbstractSniffUnitTest
 {
     /**
-     * Returns the lines where errors should occur.
-     *
-     * The key of the array should represent the line number and the value
-     * should represent the number of errors that should occur on that line.
-     *
-     * @return array<int, int>
-     *
-     * @throws \RuntimeException When an unknown sniff fixture is encountered.
+     * {@inheritDoc}
      */
-    public function getErrorList()
+    public function getErrorList($testFile='EncodingUtf8UnitTest.inc')
     {
         $testFile = func_get_arg(0);
         $parts    = explode('.', $testFile);
@@ -52,20 +45,13 @@ class PhpCodeQuality_Tests_Files_EncodingUtf8UnitTest extends PhpCodeQuality_Tes
         }
 
         throw new \RuntimeException('Unknown sniff test fixture encountered: ' . $testFile);
-
     }
 
     /**
-     * Returns the lines where warnings should occur.
-     *
-     * The key of the array should represent the line number and the value
-     * should represent the number of warnings that should occur on that line.
-     *
-     * @return array<int, int>
+     * {@inheritDoc}
      */
-    public function getWarningList()
+    public function getWarningList($testFile='EncodingUtf8UnitTest.inc')
     {
         return array();
-
     }
 }

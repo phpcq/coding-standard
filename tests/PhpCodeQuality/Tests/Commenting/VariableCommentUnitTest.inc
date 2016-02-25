@@ -1,6 +1,7 @@
 <?php
 class VariableCommentUnitTest
 {
+    protected $noComment = '';
 
     /**
      * short description of the member variable.
@@ -21,115 +22,45 @@ class VariableCommentUnitTest
      private  $_incorrectCommentStyle = '';
 
 
-     protected $noComment = '';
-
-
-    /**
-     *
-     * Extra newline before short comment.
-     *
-     * @var string
-     */
-     public $extraNewlineBeforeShort = '';
-
-
-    /**
-     * Extra newline between short description.
-     *
-     *
-     *
-     * - Long description,
-     *
-     * @var string
-     */
-     private $_extraNewlineBetween = '';
-
-
-    /**
-     * Extra newline before tags.
-     *
-     * Long description,
-     * with two var tags.
-     *
-     *
-     * @var string
-     * @var array
-     */
-     protected $extraNewlineBeforeTags = '';
-
-
-    /**
-     * No newline before tags, var tag missing.
-     * @see otherFunctions()
-     */
-     protected $noNewlineBeforeTags = '';
-
+     protected $noComment2 = '';
 
     /**
      * Short comment that spans multiple
-     * lines and does not end with a full stop
-     * also var type is missing
-     *
-     * @var
-     */
-     public $singleLineFullStopShortComment = '';
-
-
-    /**
-     * Incorrect tag indentation.
-     *
-     * @var     string
-     * @see        otherFunctions()
-     * @see anotherFunctions()
-     * @see
-     */
-     public $singleLineFullStopShortComment = '';
-
-
-    /**
-     * Unknown summary tag
-     *
-     * @var     string
-     * @summary unknown tag
-     */
-     public $missingSinceTag = '';
-
-
-    /**
-     * T_VARIABLE check, without scope.
+     * lines
      *
      * @var string
      */
-     $variableCheck = '';
+     public $singleLineFullStopShortComment = '';
 
 
     /**
-     * T_VARIABLE check, var in string and in function.
+     * Empty see tag.
      *
-     * @param integer $var1 First variable.
-     * @param integer $var2 Second variable.
-     *
-     * @return integer
+     * @var string
+     * @see
      */
-    protected function checkVariable($var1, $var2)
-    {
-        $var4 = 'A normal variable';
-        $var5 = PHP_CodeSniffer_Tokens::$operators;
-        echo "Printing $var1 $var2 and unknown $var3 in a double quoted  string\n";
-        foreach (self::$_array as $index => $content) {
-            echo $content;
-        }
+     public $singleLineEmptySees = '';
 
-        return $var1;
 
-    }//end checkVariable()
+    /**
+     * No full stop
+     *
+     * @var     string
+     */
+     public $noFullStop = '';
 
+    /**
+     * No type
+     *
+     * @var
+     */
+     public $noType = '';
 
     /**
      *
      *
      */
-     $emptyVarDoc = '';
+     private $emptyVarDoc = '';
 
      /**
      * Var type checking (int v.s. integer).
@@ -147,21 +78,10 @@ class VariableCommentUnitTest
      private $_varArrayTypeCheck;
 
 
-     /**
-     * Var type checking (STRING v.s. string).
-     *
-     * @var STRING
-     */
-     private $_varCaseTypeCheck;
-
-
     /**
      * @var integer
      */
      private $_varWithNoShortComment;
-
-     protected $noComment2 = '';
-
 
 }//end class
 
