@@ -13,7 +13,7 @@
 >
     <testsuites>
         <testsuite name="Coding standard test suite">
-            <file>./tests/CodeSnifferTestSuite.php</file>
+            <file>./tests/PhpCodeQuality/CodeSnifferTestSuite.php</file>
         </testsuite>
     </testsuites>
 

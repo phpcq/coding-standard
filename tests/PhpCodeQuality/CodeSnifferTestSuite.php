@@ -47,8 +47,8 @@ class PhpCodeQuality_CodeSnifferTestSuite
 
         // Locate the actual directory that contains the standard's tests.
         // This is individual to each standard as they could be symlinked in.
-        $baseDir  = __DIR__;
-        $iterator = new RecursiveDirectoryIterator(__DIR__ . '/PhpCodeQuality/Tests');
+        $baseDir  = realpath(__DIR__ . '/../');
+        $iterator = new RecursiveDirectoryIterator(__DIR__ . '/Tests');
         $iterator = new RecursiveCallbackFilterIterator(
             $iterator,
             function (SplFileInfo $file, $pathname, RecursiveIterator $iterator) {
