@@ -99,7 +99,7 @@ abstract class PhpCodeQuality_Tests_AbstractSniffUnitTest extends PHPUnit_Framew
         $sniffCode = $parts[0].'.'.$parts[2].'.'.$parts[3];
 
         // The name of the dummy file we are testing.
-        $testFileBase = dirname(dirname(__DIR__)) .
+        $testFileBase = dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . 'fixtures' .
             DIRECTORY_SEPARATOR . str_replace('_', DIRECTORY_SEPARATOR, $basename) . 'UnitTest.';
 
         // Get a list of all test files to check. These will have the same base

@@ -34,7 +34,7 @@
     },
     "autoload-dev": {
         "psr-0": {
-            "PhpCodeQuality_Tests_": "tests/"
+            "PhpCodeQuality_": "tests/"
         }
     },
     "extra": {

@@ -208,10 +208,6 @@ class PhpCodeQuality_Sniffs_Commenting_VariableCommentSniff extends PHP_CodeSnif
                     $error = 'Content missing for @deprecated tag in member variable comment';
                     $phpcsFile->addError($error, $tag, 'EmptyDeprecated');
                 }
-            } else {
-                $error = '%s tag is not allowed in member variable comment';
-                $data  = array($tokens[$tag]['content']);
-                $phpcsFile->addWarning($error, $tag, 'TagNotAllowed', $data);
             }
         }
 
@@ -267,7 +263,6 @@ class PhpCodeQuality_Sniffs_Commenting_VariableCommentSniff extends PHP_CodeSnif
      */
     protected function processVariable(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
     {
-
     }
 
     /**
@@ -285,6 +280,5 @@ class PhpCodeQuality_Sniffs_Commenting_VariableCommentSniff extends PHP_CodeSnif
      */
     protected function processVariableInString(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
     {
-
     }
 }
