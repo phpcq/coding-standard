@@ -34,6 +34,10 @@
     <!-- already handled by Squiz.Commenting.EmptyCatchComment.Missing. -->
     <severity>0</severity>
   </rule>
+  <rule ref="Generic.CodeAnalysis.EmptyStatement.DetectedCatch">
+    <!-- already handled by Squiz.Commenting.EmptyCatchComment.Missing. -->
+    <severity>0</severity>
+  </rule>
 
   <!-- Commenting -->
   <rule ref="PhpCodeQuality.Commenting.BlockComment.FirstLineIndent">
