@@ -17,6 +17,6 @@ The most convenient usage is to use via [phpcq/phpcq](https://github.com/phpcq/p
 Simply put the following into your projects `build.default.properties` file:
 
 ```
-phpcs.standard=${basedir}/vendor/phpcq/coding-standard/phpcs/PHPCQ/ruleset.xml
+phpcs.standard=${basedir}/vendor/phpcq/coding-standard/phpcs/PhpCodeQuality/ruleset.xml
 phpmd.ruleset=${basedir}/vendor/phpcq/coding-standard/phpmd/ruleset.xml
 ```
