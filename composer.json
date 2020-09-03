@@ -37,7 +37,7 @@
             "PhpCodeQuality_": "tests/"
         },
         "classmap": [
-            "tests/RecursiveCallbackFilterIterator.php"
+            "tests-helper/phpunit/RecursiveCallbackFilterIterator.php"
         ]
     },
     "extra": {
