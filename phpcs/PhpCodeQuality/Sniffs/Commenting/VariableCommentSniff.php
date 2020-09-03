@@ -16,6 +16,7 @@
  * @author     Marc McIntyre <mmcintyre@squiz.net>
  * @author     Christian Schiffler <c.schiffler@cyberspectrum.de>
  * @author     Tristan Lins <tristan@lins.io>
+ * @author     Sven Baumann <baumann.sv@gmail.com>
  * @copyright  2006-2015 Squiz Pty Ltd (ABN 77 084 670 600),
  *             2014-2015 Christian Schiffler <c.schiffler@cyberspectrum.de>, Tristan Lins <tristan@lins.io>
  * @license    https://github.com/phpcq/coding-standard/blob/master/LICENSE.BSD-3-CLAUSE BSD-3-Clause
@@ -80,6 +81,7 @@ class PhpCodeQuality_Sniffs_Commenting_VariableCommentSniff extends PHP_CodeSnif
      * @return void
      *
      * @SuppressWarnings(PHPMD.NPathComplexity)
+     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      */
     protected function checkShortComment(PHP_CodeSniffer_File $phpcsFile, $commentStart, $commentEnd)
     {
@@ -115,7 +117,8 @@ class PhpCodeQuality_Sniffs_Commenting_VariableCommentSniff extends PHP_CodeSnif
             'Variable comment must start with a capital letter',
             'ShortCapitalLetter',
             $shortToken,
-            ucfirst($shortContent['content'])
+            (utf8_encode($shortContent['content']) === $shortContent['content'])
+                ? ucfirst($shortContent['content']) : $shortContent['content']
         );
 
         if ('.' !== substr($shortContent['content'], -1)) {
