@@ -96,15 +96,15 @@ abstract class AbstractSniffUnitTest extends TestCase
         $basename = \substr(\get_class($this), 0, -8);
 
         // The name of the coding standard we are testing.
-        $standardName = \substr($basename, 0, \strpos($basename, '_'));
+        $standardName = \substr($basename, 0, \strpos($basename, '\\'));
 
         // The code of the sniff we are testing.
-        $parts     = \explode('_', $basename);
-        $sniffCode = $parts[0].'.'.$parts[2].'.'.$parts[3];
+        $parts     = \explode('\\', $basename);
+        $sniffCode = $parts[0].'.'.$parts[3].'.'.$parts[4];
 
         // The name of the dummy file we are testing.
-        $testFileBase = \dirname(\dirname(__DIR__)) . DIRECTORY_SEPARATOR . 'fixtures' .
-            DIRECTORY_SEPARATOR . \str_replace('_', DIRECTORY_SEPARATOR, $basename) . 'UnitTest.';
+        $testFileBase = \dirname(\dirname(__DIR__)) . DIRECTORY_SEPARATOR . 'tests' . DIRECTORY_SEPARATOR . 'fixtures' .
+            DIRECTORY_SEPARATOR . \str_replace('.', DIRECTORY_SEPARATOR, $sniffCode) . 'UnitTest.';
 
         // Get a list of all test files to check. These will have the same base
         // name but different extensions. We ignore the .php file as it is the class.
@@ -125,7 +125,7 @@ abstract class AbstractSniffUnitTest extends TestCase
         // Get them in order.
         \sort($testFiles);
 
-        $srcPath = \dirname(\dirname(\dirname(__DIR__))) . DIRECTORY_SEPARATOR . 'phpcs';
+        $srcPath = \dirname(\dirname(__DIR__)) . DIRECTORY_SEPARATOR . 'phpcs';
 
         self::$phpcs->initStandard(
             $srcPath . DIRECTORY_SEPARATOR . $standardName . DIRECTORY_SEPARATOR . 'ruleset.phpunit.xml',
@@ -387,6 +387,11 @@ abstract class AbstractSniffUnitTest extends TestCase
 
                 $failureMessages[] = $fullMessage;
             }
+        }
+
+        if (empty($allProblems)) {
+            self::assertSame($expectedErrors, $foundErrors);
+            self::assertSame($expectedWarnings, $foundWarnings);
         }
 
         return $failureMessages;
