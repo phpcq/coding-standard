@@ -4,7 +4,7 @@
  * This file is part of phpcq/coding-standard.
  *
  * (c) 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600),
- *     2014-2015 Christian Schiffler, Tristan Lins
+ *     2014-2020 Christian Schiffler, Tristan Lins
  *
  * For the full copyright and license information, please view the LICENSE.BSD-3-CLAUSE
  * file that was distributed with this source code.
@@ -16,26 +16,27 @@
  * @author     Marc McIntyre <mmcintyre@squiz.net>
  * @author     Christian Schiffler <c.schiffler@cyberspectrum.de>
  * @author     Tristan Lins <tristan@lins.io>
+ * @author     Sven Baumann <baumann.sv@gmail.com>
  * @copyright  2006-2015 Squiz Pty Ltd (ABN 77 084 670 600),
- *             2014-2015 Christian Schiffler <c.schiffler@cyberspectrum.de>, Tristan Lins <tristan@lins.io>
+ *             2014-2020 Christian Schiffler <c.schiffler@cyberspectrum.de>, Tristan Lins <tristan@lins.io>
  * @license    https://github.com/phpcq/coding-standard/blob/master/LICENSE.BSD-3-CLAUSE BSD-3-Clause
  * @link       https://github.com/phpcq/coding-standard
  * @filesource
  */
 
+namespace PhpCodeQuality\Sniffs\WhiteSpace;
+
 /**
  * Checks that one whitespace is after an asterisk in block comments.
- *
- * @SuppressWarnings(PHPMD.CamelCaseClassName)
  */
-class PhpCodeQuality_Sniffs_WhiteSpace_WhitespaceAfterAsteriskSniff implements PHP_CodeSniffer_Sniff
+class WhitespaceAfterAsteriskSniff implements \PHP_CodeSniffer_Sniff
 {
     /**
      * A list of tokenizers this sniff supports.
      *
      * @var array
      */
-    public $supportedTokenizes = array('PHP');
+    public $supportedTokenizes = ['PHP'];
 
     /**
      * Returns an array of tokens this test wants to listen for.
@@ -44,21 +45,21 @@ class PhpCodeQuality_Sniffs_WhiteSpace_WhitespaceAfterAsteriskSniff implements P
      */
     public function register()
     {
-        return array(T_DOC_COMMENT, T_COMMENT, T_DOC_COMMENT_STRING);
+        return [T_DOC_COMMENT, T_COMMENT, T_DOC_COMMENT_STRING];
     }
 
     /**
      * Processes this sniff, when one of its tokens is encountered.
      *
-     * @param PHP_CodeSniffer_File $phpcsFile The file being scanned.
-     * @param int                  $stackPtr  The position of the current token in
-     *                                        the stack passed in $tokens.
+     * @param \PHP_CodeSniffer_File $phpcsFile The file being scanned.
+     * @param int                   $stackPtr  The position of the current token in
+     *                                         the stack passed in $tokens.
      *
      * @return void
      *
      * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      */
-    public function process(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
+    public function process(\PHP_CodeSniffer_File $phpcsFile, $stackPtr)
     {
         $tokens  = $phpcsFile->getTokens();
         $token   = $tokens[$stackPtr];
@@ -79,28 +80,28 @@ class PhpCodeQuality_Sniffs_WhiteSpace_WhitespaceAfterAsteriskSniff implements P
             return;
         }
 
-        $trimmed = ltrim($content);
+        $trimmed = \ltrim($content);
         // We ignore empty lines in doc comment.
         if ($trimmed == '*') {
             return;
         }
 
-        if ((strpos($trimmed, '*') === 0)
-            && (strpos($trimmed, ' ') != 1)
-            && (strpos($trimmed, '/') != 1)
-            && (strpos($trimmed, "\n") != 1)
+        if ((\strpos($trimmed, '*') === 0)
+            && (\strpos($trimmed, ' ') != 1)
+            && (\strpos($trimmed, '/') != 1)
+            && (\strpos($trimmed, "\n") != 1)
         ) {
-            $asterisk = strpos($content, '*');
-            $prefix   = substr($content, 0, ($asterisk + 1)) . ' ';
+            $asterisk = \strpos($content, '*');
+            $prefix   = \substr($content, 0, ($asterisk + 1)) . ' ';
             $fix      = $phpcsFile->addFixableError(
                 'Whitespace must be added after the asterisk in doc comments. Expected "' .
-                $prefix . ltrim($trimmed, '*') .
+                $prefix . \ltrim($trimmed, '*') .
                 '" but "' . $content . '" was found.',
                 $stackPtr
             );
 
             if ($fix === true) {
-                $replacement = $prefix . ltrim($trimmed, '*');
+                $replacement = $prefix . \ltrim($trimmed, '*');
                 $phpcsFile->fixer->replaceToken($stackPtr, $replacement);
             }
         }

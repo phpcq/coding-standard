@@ -4,7 +4,7 @@
  * This file is part of phpcq/coding-standard.
  *
  * (c) 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600),
- *     2014-2015 Christian Schiffler, Tristan Lins
+ *     2014-2020 Christian Schiffler, Tristan Lins
  *
  * For the full copyright and license information, please view the LICENSE.BSD-3-CLAUSE
  * file that was distributed with this source code.
@@ -18,11 +18,13 @@
  * @author     Tristan Lins <tristan@lins.io>
  * @author     Sven Baumann <baumann.sv@gmail.com>
  * @copyright  2006-2015 Squiz Pty Ltd (ABN 77 084 670 600),
- *             2014-2015 Christian Schiffler <c.schiffler@cyberspectrum.de>, Tristan Lins <tristan@lins.io>
+ *             2014-2020 Christian Schiffler <c.schiffler@cyberspectrum.de>, Tristan Lins <tristan@lins.io>
  * @license    https://github.com/phpcq/coding-standard/blob/master/LICENSE.BSD-3-CLAUSE BSD-3-Clause
  * @link       https://github.com/phpcq/coding-standard
  * @filesource
  */
+
+namespace PhpCodeQuality\Sniffs\Commenting;
 
 /**
  * Parses and verifies the variable doc comment.
@@ -35,27 +37,25 @@
  *  <li>There is a blank line between the description and the tags.</li>
  *  <li>Check the order, indentation and content of each tag.</li>
  * </ul>
- *
- * @SuppressWarnings(PHPMD.CamelCaseClassName)
  */
-class PhpCodeQuality_Sniffs_Commenting_VariableCommentSniff extends PHP_CodeSniffer_Standards_AbstractVariableSniff
+class VariableCommentSniff extends \PHP_CodeSniffer_Standards_AbstractVariableSniff
 {
     /**
      * Add an error and automatically fix it if desired.
      *
-     * @param PHP_CodeSniffer_File $phpcsFile  The file being scanned.
+     * @param \PHP_CodeSniffer_File $phpcsFile  The file being scanned.
      *
-     * @param string               $error      The error message.
+     * @param string                $error      The error message.
      *
-     * @param string               $code       A violation code unique to the sniff message.
+     * @param string                $code       A violation code unique to the sniff message.
      *
-     * @param int                  $token      The token to replace.
+     * @param int                   $token      The token to replace.
      *
-     * @param string               $newContent The new content for the token.
+     * @param string                $newContent The new content for the token.
      *
      * @return void
      */
-    protected function autoFix(PHP_CodeSniffer_File $phpcsFile, $error, $code, $token, $newContent)
+    protected function autoFix(\PHP_CodeSniffer_File $phpcsFile, $error, $code, $token, $newContent)
     {
         $tokens = $phpcsFile->getTokens();
         if ($tokens[$token]['content'] === $newContent) {
@@ -72,18 +72,18 @@ class PhpCodeQuality_Sniffs_Commenting_VariableCommentSniff extends PHP_CodeSnif
     /**
      * Ensure the first line start with capital letter and ends with full stop.
      *
-     * @param PHP_CodeSniffer_File $phpcsFile    The file being scanned.
+     * @param \PHP_CodeSniffer_File $phpcsFile    The file being scanned.
      *
-     * @param int                  $commentStart The position in the stack where the comment started.
+     * @param int                   $commentStart The position in the stack where the comment started.
      *
-     * @param int                  $commentEnd   The position in the stack where the comment ended.
+     * @param int                   $commentEnd   The position in the stack where the comment ended.
      *
      * @return void
      *
      * @SuppressWarnings(PHPMD.NPathComplexity)
      * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      */
-    protected function checkShortComment(PHP_CodeSniffer_File $phpcsFile, $commentStart, $commentEnd)
+    protected function checkShortComment(\PHP_CodeSniffer_File $phpcsFile, $commentStart, $commentEnd)
     {
         $tokens     = $phpcsFile->getTokens();
         $shortToken = $phpcsFile->findNext(T_DOC_COMMENT_STRING, $commentStart, $commentEnd);
@@ -117,11 +117,11 @@ class PhpCodeQuality_Sniffs_Commenting_VariableCommentSniff extends PHP_CodeSnif
             'Variable comment must start with a capital letter',
             'ShortCapitalLetter',
             $shortToken,
-            (utf8_encode($shortContent['content']) === $shortContent['content'])
-                ? ucfirst($shortContent['content']) : $shortContent['content']
+            (\utf8_encode($shortContent['content']) === $shortContent['content'])
+                ? \ucfirst($shortContent['content']) : $shortContent['content']
         );
 
-        if ('.' !== substr($shortContent['content'], -1)) {
+        if ('.' !== \substr($shortContent['content'], -1)) {
             $this->autoFix(
                 $phpcsFile,
                 'Variable comment must end with a full stop',
@@ -135,9 +135,9 @@ class PhpCodeQuality_Sniffs_Commenting_VariableCommentSniff extends PHP_CodeSnif
     /**
      * Called to process class member vars.
      *
-     * @param PHP_CodeSniffer_File $phpcsFile The file being scanned.
+     * @param \PHP_CodeSniffer_File $phpcsFile The file being scanned.
      *
-     * @param int                  $stackPtr  The position of the current token in the stack passed in $tokens.
+     * @param int                   $stackPtr  The position of the current token in the stack passed in $tokens.
      *
      * @return void
      *
@@ -145,7 +145,7 @@ class PhpCodeQuality_Sniffs_Commenting_VariableCommentSniff extends PHP_CodeSnif
      * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      * @SuppressWarnings(PHPMD.NPathComplexity)
      */
-    public function processMemberVar(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
+    public function processMemberVar(\PHP_CodeSniffer_File $phpcsFile, $stackPtr)
     {
         $tokens       = $phpcsFile->getTokens();
         $commentToken = array(
@@ -174,16 +174,16 @@ class PhpCodeQuality_Sniffs_Commenting_VariableCommentSniff extends PHP_CodeSnif
         }
 
         $commentStart = $tokens[$commentEnd]['comment_opener'];
-        $comment      = strtolower($phpcsFile->getTokensAsString($commentStart, ($commentEnd - $commentStart)));
+        $comment      = \strtolower($phpcsFile->getTokensAsString($commentStart, ($commentEnd - $commentStart)));
         // Accept inheriting of comments to be sufficient.
         if (strpos($comment, '@inheritdoc') !== false) {
             return;
         }
 
         // Add well known types phpcs does not know about.
-        $previous                        = PHP_CodeSniffer::$allowedTypes;
-        PHP_CodeSniffer::$allowedTypes[] = 'int';
-        PHP_CodeSniffer::$allowedTypes[] = 'bool';
+        $previous                         = \PHP_CodeSniffer::$allowedTypes;
+        \PHP_CodeSniffer::$allowedTypes[] = 'int';
+        \PHP_CodeSniffer::$allowedTypes[] = 'bool';
 
 
         $foundVar = null;
@@ -236,7 +236,7 @@ class PhpCodeQuality_Sniffs_Commenting_VariableCommentSniff extends PHP_CodeSnif
         }
 
         $varType       = $tokens[($foundVar + 2)]['content'];
-        $suggestedType = PHP_CodeSniffer::suggestType($varType);
+        $suggestedType = \PHP_CodeSniffer::suggestType($varType);
         if ($varType !== $suggestedType) {
             $error = 'Expected "%s" but found "%s" for @var tag in member variable comment';
             $data  = array(
@@ -246,7 +246,7 @@ class PhpCodeQuality_Sniffs_Commenting_VariableCommentSniff extends PHP_CodeSnif
             $phpcsFile->addError($error, ($foundVar + 2), 'IncorrectVarType', $data);
         }
 
-        PHP_CodeSniffer::$allowedTypes = $previous;
+        \PHP_CodeSniffer::$allowedTypes = $previous;
 
         $this->checkShortComment($phpcsFile, $commentStart, $commentEnd);
     }
@@ -256,15 +256,15 @@ class PhpCodeQuality_Sniffs_Commenting_VariableCommentSniff extends PHP_CodeSnif
      *
      * Not required for this sniff.
      *
-     * @param PHP_CodeSniffer_File $phpcsFile The PHP_CodeSniffer file where this token was found.
-     * @param int                  $stackPtr  The position where the double quoted
-     *                                        string was found.
+     * @param \PHP_CodeSniffer_File $phpcsFile The PHP_CodeSniffer file where this token was found.
+     * @param int                   $stackPtr  The position where the double quoted
+     *                                         string was found.
      *
      * @return void
      *
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
-    protected function processVariable(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
+    protected function processVariable(\PHP_CodeSniffer_File $phpcsFile, $stackPtr)
     {
     }
 
@@ -273,15 +273,15 @@ class PhpCodeQuality_Sniffs_Commenting_VariableCommentSniff extends PHP_CodeSnif
      *
      * Not required for this sniff.
      *
-     * @param PHP_CodeSniffer_File $phpcsFile The PHP_CodeSniffer file where this token was found.
-     * @param int                  $stackPtr  The position where the double quoted
-     *                                        string was found.
+     * @param \PHP_CodeSniffer_File $phpcsFile The PHP_CodeSniffer file where this token was found.
+     * @param int                   $stackPtr  The position where the double quoted
+     *                                         string was found.
      *
      * @return void
      *
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
-    protected function processVariableInString(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
+    protected function processVariableInString(\PHP_CodeSniffer_File $phpcsFile, $stackPtr)
     {
     }
 }
