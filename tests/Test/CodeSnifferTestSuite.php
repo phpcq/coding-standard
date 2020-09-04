@@ -3,7 +3,7 @@
 /**
  * This file is part of phpcq/coding-standard.
  *
- * (c) 2014 Christian Schiffler, Tristan Lins
+ * (c) 2014-2020 Christian Schiffler, Tristan Lins
  *
  * For the full copyright and license information, please view the LICENSE.BSD-3-CLAUSE
  * file that was distributed with this source code.
@@ -13,45 +13,43 @@
  * @package    phpcq/coding-standard
  * @author     Christian Schiffler <c.schiffler@cyberspectrum.de>
  * @author     Tristan Lins <tristan@lins.io>
- * @copyright  2014-2015 Christian Schiffler <c.schiffler@cyberspectrum.de>, Tristan Lins <tristan@lins.io>
+ * @author     Sven Baumann <baumann.sv@gmail.com>
+ * @copyright  2014-2020 Christian Schiffler <c.schiffler@cyberspectrum.de>, Tristan Lins <tristan@lins.io>
  * @license    https://github.com/phpcq/coding-standard/blob/master/LICENSE.MIT MIT
  * @link       https://github.com/phpcq/coding-standard
  * @filesource
  */
 
+namespace PhpCodeQuality\CodingStandard\Test;
+
+use PhpCodeQuality\CodingStandard\PHPUnit\RecursiveCallbackFilterIterator;
+use PHPUnit\Framework\Test;
+use PHPUnit\Framework\TestSuite;
+use PHPUnit_Framework_TestResult;
+
 /**
  * A test class for running all CodeSniffer related unit tests.
  */
-class PhpCodeQuality_CodeSnifferTestSuite
+class CodeSnifferTestSuite implements Test
 {
-    /**
-     * Prepare the test runner.
-     *
-     * @return void
-     */
-    public static function main()
-    {
-        PHPUnit_TextUI_TestRunner::run(self::suite());
-    }
-
     /**
      * Add all PHP_CodeSniffer test suites into a single test suite.
      *
-     * @return PHPUnit_Framework_TestSuite
+     * @return TestSuite
      *
      * @SuppressWarnings(PHPMD.UnusedLocalVariable)
      */
     public static function suite()
     {
-        $suite = new PHPUnit_Framework_TestSuite('PHP code quality project CodeSniffer test suite');
+        $suite = new TestSuite('PHP code quality project CodeSniffer test suite');
 
         // Locate the actual directory that contains the standard's tests.
         // This is individual to each standard as they could be symlinked in.
-        $baseDir  = realpath(__DIR__ . '/../');
-        $iterator = new RecursiveDirectoryIterator(__DIR__ . '/Tests');
+        $baseDir  = \realpath(__DIR__ . '/../');
+        $iterator = new \RecursiveDirectoryIterator(__DIR__);
         $iterator = new RecursiveCallbackFilterIterator(
             $iterator,
-            function (SplFileInfo $file, $pathname, RecursiveIterator $iterator) {
+            function (\SplFileInfo $file, $pathname, \RecursiveIterator $iterator) {
                 if ($iterator->hasChildren()) {
                     return true;
                 }
@@ -60,29 +58,45 @@ class PhpCodeQuality_CodeSnifferTestSuite
                     return false;
                 }
 
-                if (!preg_match('~^[^\.].+\.php$~', $file->getBasename())) {
+                if (!\preg_match('~^[^\.].+\.php$~', $file->getBasename())) {
                     return false;
                 }
 
-                if (preg_match('~^Abstract~', $file->getBasename())) {
+                if (\preg_match('~^Abstract~', $file->getBasename())) {
                     return false;
                 }
 
                 return true;
             }
         );
-        $iterator = new RecursiveIteratorIterator($iterator);
+        $iterator = new \RecursiveIteratorIterator($iterator);
 
         foreach ($iterator as $file) {
             $filePath  = $file->getPathname();
-            $className = str_replace($baseDir . DIRECTORY_SEPARATOR, '', $filePath);
-            $className = substr($className, 0, -4);
-            $className = str_replace(DIRECTORY_SEPARATOR, '_', $className);
+            $className = \str_replace($baseDir . DIRECTORY_SEPARATOR, '', $filePath);
+            $className = \substr($className, 0, -4);
+            $className = 'PhpCodeQuality\\CodingStandard\\' . \str_replace(DIRECTORY_SEPARATOR, '\\', $className);
 
             $class = new $className();
             $suite->addTest($class);
         }
 
         return $suite;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function count()
+    {
+        // Do nothing.
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function run(PHPUnit_Framework_TestResult $result = null)
+    {
+        // Do nothing.
     }
 }

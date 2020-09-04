@@ -33,12 +33,10 @@
         "phpcq/phpcq": "The PHP code quality project core tasks."
     },
     "autoload-dev": {
-        "psr-0": {
-            "PhpCodeQuality_": "tests/"
-        },
-        "classmap": [
-            "tests-helper/phpunit/RecursiveCallbackFilterIterator.php"
-        ]
+        "psr-4": {
+            "PhpCodeQuality\\CodingStandard\\Test\\": "tests/Test",
+            "PhpCodeQuality\\CodingStandard\\PHPUnit\\": "tests/PHPUnit"
+        }
     },
     "extra": {
         "branch-alias": {
