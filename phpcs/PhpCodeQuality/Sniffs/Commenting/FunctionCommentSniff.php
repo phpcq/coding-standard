@@ -4,7 +4,7 @@
  * This file is part of phpcq/coding-standard.
  *
  * (c) 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600),
- *     2014-2015 Christian Schiffler, Tristan Lins
+ *     2014-2020 Christian Schiffler, Tristan Lins
  *
  * For the full copyright and license information, please view the LICENSE.BSD-3-CLAUSE
  * file that was distributed with this source code.
@@ -16,12 +16,15 @@
  * @author     Marc McIntyre <mmcintyre@squiz.net>
  * @author     Christian Schiffler <c.schiffler@cyberspectrum.de>
  * @author     Tristan Lins <tristan@lins.io>
+ * @author     Sven Baumann <baumann.sv@gmail.com>
  * @copyright  2006-2015 Squiz Pty Ltd (ABN 77 084 670 600),
- *             2014-2015 Christian Schiffler <c.schiffler@cyberspectrum.de>, Tristan Lins <tristan@lins.io>
+ *             2014-2020 Christian Schiffler <c.schiffler@cyberspectrum.de>, Tristan Lins <tristan@lins.io>
  * @license    https://github.com/phpcq/coding-standard/blob/master/LICENSE.BSD-3-CLAUSE BSD-3-Clause
  * @link       https://github.com/phpcq/coding-standard
  * @filesource
  */
+
+namespace PhpCodeQuality\Sniffs\Commenting;
 
 /**
  * Parses and verifies the doc comments for functions.
@@ -49,80 +52,78 @@
  * <li>allow "int" and "bool" as type hints.<li>
  * <li>not strip the "&" from parameters when passing values by reference</li>
  * </ul>
- *
- * @SuppressWarnings(PHPMD.CamelCaseClassName)
  */
-class PhpCodeQuality_Sniffs_Commenting_FunctionCommentSniff extends Squiz_Sniffs_Commenting_FunctionCommentSniff
+class FunctionCommentSniff extends \Squiz_Sniffs_Commenting_FunctionCommentSniff
 {
     /**
      * Check if an php doc contains @inheritdoc.
      *
-     * @param PHP_CodeSniffer_File $phpcsFile
-     * @param int                  $stackPtr
-     * @param int                  $commentStart
+     * @param \PHP_CodeSniffer_File $phpcsFile
+     * @param int                   $stackPtr
+     * @param int                   $commentStart
      *
      * @return bool
      */
-    protected function isInherited(PHP_CodeSniffer_File $phpcsFile, $commentStart)
+    protected function isInherited(\PHP_CodeSniffer_File $phpcsFile, $commentStart)
     {
         $tokens  = $phpcsFile->getTokens();
-        $comment = strtolower($phpcsFile->getTokensAsString($commentStart, $tokens[$commentStart]['comment_closer']));
+        $comment = \strtolower($phpcsFile->getTokensAsString($commentStart, $tokens[$commentStart]['comment_closer']));
 
         // Accept inheriting of comments to be sufficient.
-        return (strpos($comment, '@inheritdoc') !== false);
+        return (\strpos($comment, '@inheritdoc') !== false);
     }
 
     /**
      * Process the return comment of this function comment.
      *
-     * @param PHP_CodeSniffer_File $phpcsFile    The file being scanned.
-     * @param int                  $stackPtr     The position of the current token
-     *                                           in the stack passed in $tokens.
-     * @param int                  $commentStart The position in the stack where the comment started.
+     * @param \PHP_CodeSniffer_File $phpcsFile    The file being scanned.
+     * @param int                   $stackPtr     The position of the current token
+     *                                            in the stack passed in $tokens.
+     * @param int                   $commentStart The position in the stack where the comment started.
      *
      * @return void
      */
-    protected function processReturn(PHP_CodeSniffer_File $phpcsFile, $stackPtr, $commentStart)
+    protected function processReturn(\PHP_CodeSniffer_File $phpcsFile, $stackPtr, $commentStart)
     {
         // Accept inheriting of comments to be sufficient.
         if ($this->isInherited($phpcsFile, $commentStart)) {
             return;
         }
 
-        $previous = PHP_CodeSniffer::$allowedTypes;
+        $previous = \PHP_CodeSniffer::$allowedTypes;
 
-        PHP_CodeSniffer::$allowedTypes[] = 'int';
-        PHP_CodeSniffer::$allowedTypes[] = 'bool';
+        \PHP_CodeSniffer::$allowedTypes[] = 'int';
+        \PHP_CodeSniffer::$allowedTypes[] = 'bool';
 
         parent::processReturn($phpcsFile, $stackPtr, $commentStart);
 
-        PHP_CodeSniffer::$allowedTypes = $previous;
+        \PHP_CodeSniffer::$allowedTypes = $previous;
     }
 
     /**
      * Process the function parameter comments.
      *
-     * @param PHP_CodeSniffer_File $phpcsFile    The file being scanned.
-     * @param int                  $stackPtr     The position of the current token
-     *                                           in the stack passed in $tokens.
-     * @param int                  $commentStart The position in the stack where the comment started.
+     * @param \PHP_CodeSniffer_File $phpcsFile    The file being scanned.
+     * @param int                   $stackPtr     The position of the current token
+     *                                            in the stack passed in $tokens.
+     * @param int                   $commentStart The position in the stack where the comment started.
      *
      * @return void
      */
-    protected function processParams(PHP_CodeSniffer_File $phpcsFile, $stackPtr, $commentStart)
+    protected function processParams(\PHP_CodeSniffer_File $phpcsFile, $stackPtr, $commentStart)
     {
         // Accept inheriting of comments to be sufficient.
         if ($this->isInherited($phpcsFile, $commentStart)) {
             return;
         }
 
-        $previous = PHP_CodeSniffer::$allowedTypes;
+        $previous = \PHP_CodeSniffer::$allowedTypes;
 
-        PHP_CodeSniffer::$allowedTypes[] = 'int';
-        PHP_CodeSniffer::$allowedTypes[] = 'bool';
+        \PHP_CodeSniffer::$allowedTypes[] = 'int';
+        \PHP_CodeSniffer::$allowedTypes[] = 'bool';
 
         parent::processParams($phpcsFile, $stackPtr, $commentStart);
 
-        PHP_CodeSniffer::$allowedTypes = $previous;
+        \PHP_CodeSniffer::$allowedTypes = $previous;
     }
 }
