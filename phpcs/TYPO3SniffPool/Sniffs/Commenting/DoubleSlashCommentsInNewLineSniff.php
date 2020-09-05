@@ -38,6 +38,9 @@
 
 namespace TYPO3SniffPool\Sniffs\Commenting;
 
+use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Sniffs\Sniff;
+
 /**
  * Checks that single line comments (//) are in a new line.
  *
@@ -49,7 +52,8 @@ namespace TYPO3SniffPool\Sniffs\Commenting;
  * @version   Release: @package_version@
  * @link      http://pear.typo3.org
  */
-class DoubleSlashCommentsInNewLineSniff implements \PHP_CodeSniffer_Sniff {
+class DoubleSlashCommentsInNewLineSniff implements Sniff
+{
     /**
      * A list of tokenizers this sniff supports
      *
@@ -68,13 +72,12 @@ class DoubleSlashCommentsInNewLineSniff implements \PHP_CodeSniffer_Sniff {
     /**
      * Processes this sniff, when one of its tokens is encountered.
      *
-     * @param \PHP_CodeSniffer_File $phpcsFile The file being scanned.
-     * @param int                   $stackPtr  The position of the current token in
-     *                                         the stack passed in $tokens.
+     * @param File $phpcsFile The file being scanned.
+     * @param int  $stackPtr  The position of the current token in the stack passed in $tokens.
      *
      * @return void
      */
-    public function process(\PHP_CodeSniffer_File $phpcsFile, $stackPtr) {
+    public function process(File $phpcsFile, $stackPtr) {
         $tokens = $phpcsFile->getTokens();
         $keyword = $tokens[$stackPtr]['content'];
         if (\substr($keyword, 0, 2) === '//' && $this->existsOtherCodeBeforeThisComment($tokens, $stackPtr)) {
@@ -96,4 +99,3 @@ class DoubleSlashCommentsInNewLineSniff implements \PHP_CodeSniffer_Sniff {
         return $result;
     }
 }
-

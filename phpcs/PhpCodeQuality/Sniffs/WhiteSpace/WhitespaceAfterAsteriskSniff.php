@@ -26,10 +26,14 @@
 
 namespace PhpCodeQuality\Sniffs\WhiteSpace;
 
+use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Sniffs\Sniff;
+use PHP_CodeSniffer\Util\Tokens;
+
 /**
  * Checks that one whitespace is after an asterisk in block comments.
  */
-class WhitespaceAfterAsteriskSniff implements \PHP_CodeSniffer_Sniff
+class WhitespaceAfterAsteriskSniff implements Sniff
 {
     /**
      * A list of tokenizers this sniff supports.
@@ -51,15 +55,14 @@ class WhitespaceAfterAsteriskSniff implements \PHP_CodeSniffer_Sniff
     /**
      * Processes this sniff, when one of its tokens is encountered.
      *
-     * @param \PHP_CodeSniffer_File $phpcsFile The file being scanned.
-     * @param int                   $stackPtr  The position of the current token in
-     *                                         the stack passed in $tokens.
+     * @param File $phpcsFile The file being scanned.
+     * @param int  $stackPtr  The position of the current token in the stack passed in $tokens.
      *
      * @return void
      *
      * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      */
-    public function process(\PHP_CodeSniffer_File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, $stackPtr)
     {
         $tokens  = $phpcsFile->getTokens();
         $token   = $tokens[$stackPtr];
@@ -68,11 +71,15 @@ class WhitespaceAfterAsteriskSniff implements \PHP_CodeSniffer_Sniff
         // Check if the previous is an asterisk, if so => error.
         if ($token['code'] === T_DOC_COMMENT_STRING) {
             if ($tokens[($stackPtr - 1)]['code'] === T_DOC_COMMENT_STAR) {
-                $fix = $phpcsFile->addFixableError(
-                    'Whitespace must be added after the asterisk in doc comments. Expected "* ' . $content .
-                    '" but "*' . $content . '" was found.',
-                    $stackPtr
-                );
+                $nonSpace = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($stackPtr - 2), null, true);
+                $expected = $tokens[$nonSpace]['content'].$tokens[$stackPtr]['content'];
+                $found    = $phpcsFile->getTokensAsString($nonSpace, ($stackPtr - $nonSpace)) .
+                            $tokens[$stackPtr]['content'];
+                $data     = [$expected, $found];
+                $error    = 'Whitespace must be added after the asterisk in doc comments. Expected "* ' . $content .
+                         '" but "*' . $content . '" was found.';
+
+                $fix = $phpcsFile->addFixableError($error, $stackPtr, 'WhitespaceAfterAsteriskSniff', $data);
                 if ($fix === true) {
                     $phpcsFile->fixer->replaceToken($stackPtr, ' ' . $content);
                 }
@@ -91,14 +98,15 @@ class WhitespaceAfterAsteriskSniff implements \PHP_CodeSniffer_Sniff
             && (\strpos($trimmed, '/') != 1)
             && (\strpos($trimmed, "\n") != 1)
         ) {
+            $nonSpace = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($stackPtr - 2), null, true);
+            $expected = $tokens[$nonSpace]['content'].$tokens[$stackPtr]['content'];
+            $found    = $phpcsFile->getTokensAsString($nonSpace, ($stackPtr - $nonSpace)).$tokens[$stackPtr]['content'];
+            $data     = [$expected, $found];
             $asterisk = \strpos($content, '*');
             $prefix   = \substr($content, 0, ($asterisk + 1)) . ' ';
-            $fix      = $phpcsFile->addFixableError(
-                'Whitespace must be added after the asterisk in doc comments. Expected "' .
-                $prefix . \ltrim($trimmed, '*') .
-                '" but "' . $content . '" was found.',
-                $stackPtr
-            );
+            $error    = 'Whitespace must be added after the asterisk in doc comments. Expected "' . $prefix .
+                        \ltrim($trimmed, '*') . '" but "' . $content . '" was found.';
+            $fix      = $phpcsFile->addFixableError($error, $stackPtr, 'WhitespaceAfterAsterisk', $data);
 
             if ($fix === true) {
                 $replacement = $prefix . \ltrim($trimmed, '*');

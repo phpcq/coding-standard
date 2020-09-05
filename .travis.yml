@@ -16,8 +16,6 @@ php:
 
 matrix:
   fast_finish: true
-  allow_failures:
-    -  php: "7.4"
 
 before_install:
   - echo "memory_limit = -1" > travis.php.ini && phpenv config-add travis.php.ini

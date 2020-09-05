@@ -24,15 +24,18 @@
 
 namespace PhpCodeQuality\Sniffs\Commenting;
 
+use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Standards\Generic\Sniffs\Commenting\DocCommentSniff as CSDocCommentSniffAlias;
+
 /**
  * Ensures doc blocks follow basic formatting.
  */
-class DocCommentSniff extends \Generic_Sniffs_Commenting_DocCommentSniff
+class DocCommentSniff extends CSDocCommentSniffAlias
 {
     /**
      * {@inheritDoc}
      */
-    public function process(\PHP_CodeSniffer_File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
         $token  = $tokens[$stackPtr];

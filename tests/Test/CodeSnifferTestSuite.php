@@ -22,11 +22,28 @@
 
 namespace PhpCodeQuality\CodingStandard\Test;
 
+use PHP_CodeSniffer\Util\Tokens;
 use PhpCodeQuality\CodingStandard\PHPUnit\CodeSnifferTestSuite56;
 use PhpCodeQuality\CodingStandard\PHPUnit\CodeSnifferTestSuite7x;
 
+if (defined('PHP_CODESNIFFER_IN_TESTS') === false) {
+    define('PHP_CODESNIFFER_IN_TESTS', true);
+}
+
+if (defined('PHP_CODESNIFFER_CBF') === false) {
+    define('PHP_CODESNIFFER_CBF', false);
+}
+
+if (defined('PHP_CODESNIFFER_VERBOSITY') === false) {
+    define('PHP_CODESNIFFER_VERBOSITY', 0);
+}
+
+include_once \dirname(\dirname(__DIR__)) . '/vendor/squizlabs/php_codesniffer/autoload.php';
+
+$tokens = new Tokens();
+
 if (PHP_VERSION_ID >= 70100) {
     class CodeSnifferTestSuite extends CodeSnifferTestSuite7x {}
-    } else {
+} else {
     class CodeSnifferTestSuite extends CodeSnifferTestSuite56 {}
 }

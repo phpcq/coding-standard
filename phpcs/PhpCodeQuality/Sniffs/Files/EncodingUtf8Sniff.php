@@ -26,10 +26,13 @@
 
 namespace PhpCodeQuality\Sniffs\Files;
 
+use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Sniffs\Sniff;
+
 /**
  * Verifies that the current file contains only valid UTF-8 content.
  */
-class EncodingUtf8Sniff implements \PHP_CodeSniffer_Sniff
+class EncodingUtf8Sniff implements Sniff
 {
     /**
      * A list of tokenizers this sniff supports.
@@ -62,13 +65,12 @@ class EncodingUtf8Sniff implements \PHP_CodeSniffer_Sniff
     /**
      * Processes this sniff, when one of its tokens is encountered.
      *
-     * @param \PHP_CodeSniffer_File $phpcsFile The file being scanned.
-     * @param int                   $stackPtr  The position of the current token in
-     *                                         the stack passed in $tokens.
+     * @param File $phpcsFile The file being scanned.
+     * @param int  $stackPtr  The position of the current token in the stack passed in $tokens.
      *
      * @return void
      */
-    public function process(\PHP_CodeSniffer_File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, $stackPtr)
     {
         if (\in_array($phpcsFile->getFilename(), $this->visitedFiles)) {
             return;
@@ -82,7 +84,7 @@ class EncodingUtf8Sniff implements \PHP_CodeSniffer_Sniff
 
         if ($encoding !== 'UTF-8') {
             $error = 'Files must use UTF-8 character set; but ' . $encoding . ' found.';
-            $phpcsFile->addError($error, $stackPtr);
+            $phpcsFile->addError($error, $stackPtr, 'Found');
         }
     }
 }

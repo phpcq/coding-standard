@@ -22,76 +22,25 @@
 
 namespace PhpCodeQuality\CodingStandard\PHPUnit;
 
-use PhpCodeQuality\CodingStandard\PHPUnit\RecursiveCallbackFilterIterator;
 use PHPUnit\Framework\Test;
 use PHPUnit\Framework\TestResult;
-use PHPUnit\Framework\TestSuite;
+use PHPUnit\TextUI\TestRunner;
 
 /**
  * A test class for running all CodeSniffer related unit tests.
  */
-class CodeSnifferTestSuite7x implements Test
+class CodeSnifferTestSuite7x extends AbstractCodeSnifferTestSuite implements Test
 {
     /**
-     * Add all PHP_CodeSniffer test suites into a single test suite.
+     * Prepare the test runner.
      *
-     * @return TestSuite
-     *
-     * @SuppressWarnings(PHPMD.UnusedLocalVariable)
+     * @return void
      */
-    public static function suite()
+    public static function main()
     {
-        $suite = new TestSuite('PHP code quality project CodeSniffer test suite');
+        TestRunner::run(self::suite());
 
-        // Locate the actual directory that contains the standard's tests.
-        // This is individual to each standard as they could be symlinked in.
-        $baseDir  = \dirname(\realpath(__DIR__));
-        $iterator = new \RecursiveDirectoryIterator($baseDir . DIRECTORY_SEPARATOR . 'Test');
-        $iterator = new RecursiveCallbackFilterIterator(
-            $iterator,
-            function (\SplFileInfo $file, $pathname, \RecursiveIterator $iterator) {
-                if ($iterator->hasChildren()) {
-                    return true;
-                }
-
-                if (!$file->isFile()) {
-                    return false;
-                }
-
-                if (!\preg_match('~^[^\.].+\.php$~', $file->getBasename())) {
-                    return false;
-                }
-
-                if (\preg_match('~^Abstract~', $file->getBasename())) {
-                    return false;
-                }
-
-                return true;
-            }
-        );
-        $iterator = new \RecursiveIteratorIterator($iterator);
-
-        foreach ($iterator as $file) {
-            $filePath  = $file->getPathname();
-            $className = \str_replace($baseDir . DIRECTORY_SEPARATOR, '', $filePath);
-            $className = \substr($className, 0, -4);
-            $className = 'PhpCodeQuality\\CodingStandard\\' . \str_replace(DIRECTORY_SEPARATOR, '\\', $className);
-
-            $class = new $className();
-            $suite->addTest($class);
-        }
-
-        return $suite;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function count()
-    {
-        // Do nothing.
-    }
-
+    }//end main()
     /**
      * {@inheritDoc}
      */

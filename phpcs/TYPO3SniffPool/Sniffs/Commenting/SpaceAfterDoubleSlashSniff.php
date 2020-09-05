@@ -38,6 +38,9 @@
 
 namespace TYPO3SniffPool\Sniffs\Commenting;
 
+use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Sniffs\Sniff;
+
 /**
  * Checks that the include_once is used in all cases.
  *
@@ -49,7 +52,8 @@ namespace TYPO3SniffPool\Sniffs\Commenting;
  * @version   Release: @package_version@
  * @link      http://pear.typo3.org
  */
-class SpaceAfterDoubleSlashSniff implements \PHP_CodeSniffer_Sniff {
+class SpaceAfterDoubleSlashSniff implements Sniff
+{
     /**
      * A list of tokenizers this sniff supports
      *
@@ -67,18 +71,17 @@ class SpaceAfterDoubleSlashSniff implements \PHP_CodeSniffer_Sniff {
     /**
      * Processes this sniff, when one of its tokens is encountered.
      *
-     * @param \PHP_CodeSniffer_File $phpcsFile The file being scanned.
-     * @param int                   $stackPtr  The position of the current token in
-     *                                         the stack passed in $tokens.
+     * @param File $phpcsFile The file being scanned.
+     * @param int  $stackPtr  The position of the current token in the stack passed in $tokens.
      *
      * @return void
      */
-    public function process(\PHP_CodeSniffer_File $phpcsFile, $stackPtr) {
+    public function process(File $phpcsFile, $stackPtr) {
         $tokens = $phpcsFile->getTokens();
         $keyword = $tokens[$stackPtr]['content'];
         if (\substr($keyword, 0, 2) === '//' && !(\substr($keyword, 2, 1) === ' ')) {
             $error = 'Space must be added in single line comments after the comment sign (double slash).';
-            $phpcsFile->addError($error, $stackPtr);
+            $phpcsFile->addError($error, $stackPtr, 'Found');
         }
     }
 }

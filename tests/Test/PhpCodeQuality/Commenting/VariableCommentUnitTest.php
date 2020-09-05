@@ -24,27 +24,33 @@
  * @filesource
  */
 
-namespace PhpCodeQuality\CodingStandard\Test\Commenting;
+namespace PhpCodeQuality\CodingStandard\Test\PhpCodeQuality\Commenting;
 
 use PhpCodeQuality\CodingStandard\Test\AbstractSniffUnitTest;
 
 /**
- * Unit test class for the BlockComment sniff.
- *
- * A sniff unit test checks a .inc file for expected violations of a single
- * coding standard. Expected errors and warnings are stored in this class.
+ * Unit test class for VariableCommentSniff.
  */
-class BlockCommentUnitTest extends AbstractSniffUnitTest
+class VariableCommentUnitTest extends AbstractSniffUnitTest
 {
     /**
      * {@inheritDoc}
      *
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
-    public function getErrorList($testFile = 'BlockCommentUnitTest.inc')
+    public function getErrorList($testFile = 'VariableCommentUnitTest.inc')
     {
         return [
-            19 => 1
+            4   => 1,
+            7   => 1,
+            21  => 1,
+            25  => 1,
+            28  => 1,
+            40  => 1,
+            46  => 1,
+            55  => 1,
+            62  => 1,
+            98  => 1,
         ];
     }
 
@@ -53,7 +59,7 @@ class BlockCommentUnitTest extends AbstractSniffUnitTest
      *
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
-    public function getWarningList($testFile = 'BlockCommentUnitTest.inc')
+    public function getWarningList($testFile = 'VariableCommentUnitTest.inc')
     {
         return [];
     }

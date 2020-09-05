@@ -26,26 +26,30 @@
 
 namespace PhpCodeQuality\Sniffs\Strings;
 
+use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Standards\Generic\Sniffs\Strings\UnnecessaryStringConcatSniff as CSUnnecessaryStringConcatSniff;
+use PHP_CodeSniffer\Util\Tokens;
+
 /**
  * Checks that two strings are not concatenated together; suggests using one string instead.
  *
  * Allows concatenation to span over multiple lines and to have the php end token hack ('?' . '>') to work.
  */
-class UnnecessaryStringConcatSniff extends \Generic_Sniffs_Strings_UnnecessaryStringConcatSniff
+class UnnecessaryStringConcatSniff extends CSUnnecessaryStringConcatSniff
 {
     /**
      * Processes this sniff, when one of its tokens is encountered.
      *
-     * @param \PHP_CodeSniffer_File $phpcsFile The file being scanned.
-     * @param int                   $stackPtr  The position of the current token
-     *                                         in the stack passed in $tokens.
+     * @param File $phpcsFile The file being scanned.
+     * @param int  $stackPtr  The position of the current token
+     *                        in the stack passed in $tokens.
      *
      * @return void
      *
      * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      * @SuppressWarnings(PHPMD.NPathComplexity)
      */
-    public function process(\PHP_CodeSniffer_File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, $stackPtr)
     {
         // Work out which type of file this is for.
         $tokens = $phpcsFile->getTokens();
@@ -72,7 +76,7 @@ class UnnecessaryStringConcatSniff extends \Generic_Sniffs_Strings_UnnecessarySt
             return;
         }
 
-        $stringTokens = \PHP_CodeSniffer_Tokens::$stringTokens;
+        $stringTokens = Tokens::$stringTokens;
         if (\in_array($tokens[$prev]['code'], $stringTokens) && \in_array($tokens[$next]['code'], $stringTokens)) {
             if ($tokens[$prev]['content'][0] === $tokens[$next]['content'][0]) {
                 // Before we throw an error for PHP, allow strings to be
