@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/phpcq/coding-standard.svg?style=flat-square&label=stable build)](https://travis-ci.org/phpcq/coding-standard)
+[![Build Status](https://travis-ci.org/phpcq/coding-standard.svg?style=flat-square&label=stable)](https://travis-ci.org/phpcq/coding-standard)
 [![Latest Version tagged](http://img.shields.io/github/tag/phpcq/coding-standard.svg?style=flat-square)](https://github.com/phpcq/coding-standard/tags)
 [![Latest Version on Packagist](http://img.shields.io/packagist/v/phpcq/coding-standard.svg?style=flat-square)](https://packagist.org/packages/phpcq/coding-standard)
 [![Installations via composer per month](http://img.shields.io/packagist/dm/phpcq/coding-standard.svg?style=flat-square)](https://packagist.org/packages/phpcq/coding-standard)
