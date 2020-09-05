@@ -26,6 +26,10 @@
 
 namespace PhpCodeQuality\Sniffs\Commenting;
 
+use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Standards\Squiz\Sniffs\Commenting\FunctionCommentSniff as CSFunctionCommentSniffAlias;
+use PHP_CodeSniffer\Util\Common;
+
 /**
  * Parses and verifies the doc comments for functions.
  *
@@ -53,18 +57,18 @@ namespace PhpCodeQuality\Sniffs\Commenting;
  * <li>not strip the "&" from parameters when passing values by reference</li>
  * </ul>
  */
-class FunctionCommentSniff extends \Squiz_Sniffs_Commenting_FunctionCommentSniff
+class FunctionCommentSniff extends CSFunctionCommentSniffAlias
 {
     /**
      * Check if an php doc contains @inheritdoc.
      *
-     * @param \PHP_CodeSniffer_File $phpcsFile
-     * @param int                   $stackPtr
-     * @param int                   $commentStart
+     * @param File $phpcsFile
+     * @param int  $stackPtr
+     * @param int  $commentStart
      *
      * @return bool
      */
-    protected function isInherited(\PHP_CodeSniffer_File $phpcsFile, $commentStart)
+    protected function isInherited(File $phpcsFile, $commentStart)
     {
         $tokens  = $phpcsFile->getTokens();
         $comment = \strtolower($phpcsFile->getTokensAsString($commentStart, $tokens[$commentStart]['comment_closer']));
@@ -76,54 +80,54 @@ class FunctionCommentSniff extends \Squiz_Sniffs_Commenting_FunctionCommentSniff
     /**
      * Process the return comment of this function comment.
      *
-     * @param \PHP_CodeSniffer_File $phpcsFile    The file being scanned.
-     * @param int                   $stackPtr     The position of the current token
-     *                                            in the stack passed in $tokens.
-     * @param int                   $commentStart The position in the stack where the comment started.
+     * @param File $phpcsFile    The file being scanned.
+     * @param int  $stackPtr     The position of the current token
+     *                           in the stack passed in $tokens.
+     * @param int  $commentStart The position in the stack where the comment started.
      *
      * @return void
      */
-    protected function processReturn(\PHP_CodeSniffer_File $phpcsFile, $stackPtr, $commentStart)
+    protected function processReturn(File $phpcsFile, $stackPtr, $commentStart)
     {
         // Accept inheriting of comments to be sufficient.
         if ($this->isInherited($phpcsFile, $commentStart)) {
             return;
         }
 
-        $previous = \PHP_CodeSniffer::$allowedTypes;
+        $previous = Common::$allowedTypes;
 
-        \PHP_CodeSniffer::$allowedTypes[] = 'int';
-        \PHP_CodeSniffer::$allowedTypes[] = 'bool';
+        Common::$allowedTypes[] = 'int';
+        Common::$allowedTypes[] = 'bool';
 
         parent::processReturn($phpcsFile, $stackPtr, $commentStart);
 
-        \PHP_CodeSniffer::$allowedTypes = $previous;
+        Common::$allowedTypes = $previous;
     }
 
     /**
      * Process the function parameter comments.
      *
-     * @param \PHP_CodeSniffer_File $phpcsFile    The file being scanned.
-     * @param int                   $stackPtr     The position of the current token
-     *                                            in the stack passed in $tokens.
-     * @param int                   $commentStart The position in the stack where the comment started.
+     * @param File $phpcsFile    The file being scanned.
+     * @param int  $stackPtr     The position of the current token
+     *                           in the stack passed in $tokens.
+     * @param int  $commentStart The position in the stack where the comment started.
      *
      * @return void
      */
-    protected function processParams(\PHP_CodeSniffer_File $phpcsFile, $stackPtr, $commentStart)
+    protected function processParams(File $phpcsFile, $stackPtr, $commentStart)
     {
         // Accept inheriting of comments to be sufficient.
         if ($this->isInherited($phpcsFile, $commentStart)) {
             return;
         }
 
-        $previous = \PHP_CodeSniffer::$allowedTypes;
+        $previous = Common::$allowedTypes;
 
-        \PHP_CodeSniffer::$allowedTypes[] = 'int';
-        \PHP_CodeSniffer::$allowedTypes[] = 'bool';
+        Common::$allowedTypes[] = 'int';
+        Common::$allowedTypes[] = 'bool';
 
         parent::processParams($phpcsFile, $stackPtr, $commentStart);
 
-        \PHP_CodeSniffer::$allowedTypes = $previous;
+        Common::$allowedTypes = $previous;
     }
 }

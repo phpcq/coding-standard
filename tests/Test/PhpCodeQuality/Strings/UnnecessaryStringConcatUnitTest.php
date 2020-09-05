@@ -24,38 +24,50 @@
  * @filesource
  */
 
-namespace PhpCodeQuality\CodingStandard\Test\Files;
+namespace PhpCodeQuality\CodingStandard\Test\PhpCodeQuality\Strings;
 
 use PhpCodeQuality\CodingStandard\Test\AbstractSniffUnitTest;
 
 /**
- * Verifies that the current file contains only valid utf-8 content.
+ * Unit test class for the UnnecessaryStringConcat sniff.
+ *
+ * A sniff unit test checks a .inc file for expected violations of a single
+ * coding standard. Expected errors and warnings are stored in this class.
  */
-class EncodingUtf8UnitTest extends AbstractSniffUnitTest
+class UnnecessaryStringConcatUnitTest extends AbstractSniffUnitTest
 {
     /**
      * {@inheritDoc}
      */
-    public function getErrorList($testFile='EncodingUtf8UnitTest.inc')
+    public function getErrorList($testFile='UnnecessaryStringConcatUnitTest.inc')
     {
-        $testFile = \func_get_arg(0);
-        $parts    = \explode('.', $testFile);
-
-        switch ($parts[1]) {
-            case 'UTF-8':
-                return [];
-            case 'ISO-8859-1':
-                return [1 => 1];
-            default:
+        switch ($testFile) {
+        case 'UnnecessaryStringConcatUnitTest.inc':
+            return [
+                    2  => 1,
+                    6  => 1,
+                    9  => 1,
+                    12 => 1,
+                    21 => 4,
+                    24 => 1,
+            ];
+        case 'UnnecessaryStringConcatUnitTest.js':
+            return [
+                    1  => 1,
+                    8  => 1,
+                    11 => 1,
+                    16 => 4,
+                    19 => 1,
+            ];
+        default:
+            return [];
         }
-
-        throw new \RuntimeException('Unknown sniff test fixture encountered: ' . $testFile);
     }
 
     /**
      * {@inheritDoc}
      */
-    public function getWarningList($testFile='EncodingUtf8UnitTest.inc')
+    public function getWarningList($testFile='UnnecessaryStringConcatUnitTest.inc')
     {
         return [];
     }

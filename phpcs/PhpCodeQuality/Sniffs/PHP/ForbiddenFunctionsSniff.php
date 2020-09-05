@@ -26,11 +26,13 @@
 
 namespace PhpCodeQuality\Sniffs\PHP;
 
+use PHP_CodeSniffer\Standards\Generic\Sniffs\PHP\ForbiddenFunctionsSniff as CSForbiddenFunctionsSniffAlias;
+
 /**
  * Discourages the use of alias functions that are kept in PHP for compatibility with older versions.
  * Also disallows the usage of debug methods.
  */
-class ForbiddenFunctionsSniff extends \Generic_Sniffs_PHP_ForbiddenFunctionsSniff
+class ForbiddenFunctionsSniff extends CSForbiddenFunctionsSniffAlias
 {
     /**
      * A list of forbidden functions with their alternatives.

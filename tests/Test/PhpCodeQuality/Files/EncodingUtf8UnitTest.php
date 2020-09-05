@@ -19,47 +19,43 @@
  * @author     Sven Baumann <baumann.sv@gmail.com>
  * @copyright  2006-2015 Squiz Pty Ltd (ABN 77 084 670 600),
  *             2014-2020 Christian Schiffler <c.schiffler@cyberspectrum.de>, Tristan Lins <tristan@lins.io>
- * @license    https://github.com/phpcq/coding-standard/blob/master/LICENSE.BSD-3-CLAUSE BSD-3-Clause
  * @link       https://github.com/phpcq/coding-standard
+ * @license    https://github.com/phpcq/coding-standard/blob/master/LICENSE.BSD-3-CLAUSE BSD-3-Clause
  * @filesource
  */
 
-namespace PhpCodeQuality\CodingStandard\Test\Commenting;
+namespace PhpCodeQuality\CodingStandard\Test\PhpCodeQuality\Files;
 
 use PhpCodeQuality\CodingStandard\Test\AbstractSniffUnitTest;
 
 /**
- * Unit test class for VariableCommentSniff.
+ * Verifies that the current file contains only valid utf-8 content.
  */
-class VariableCommentUnitTest extends AbstractSniffUnitTest
+class EncodingUtf8UnitTest extends AbstractSniffUnitTest
 {
     /**
      * {@inheritDoc}
-     *
-     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
-    public function getErrorList($testFile = 'VariableCommentUnitTest.inc')
+    public function getErrorList($testFile='EncodingUtf8UnitTest.inc')
     {
-        return [
-            4   => 1,
-            7   => 1,
-            21  => 1,
-            25  => 1,
-            28  => 1,
-            40  => 1,
-            46  => 1,
-            55  => 1,
-            62  => 1,
-            98  => 1,
-        ];
+        $testFile = \func_get_arg(0);
+        $parts    = \explode('.', $testFile);
+
+        switch ($parts[1]) {
+            case 'UTF-8':
+                return [];
+            case 'ISO-8859-1':
+                return [1 => 1];
+            default:
+        }
+
+        throw new \RuntimeException('Unknown sniff test fixture encountered: ' . $testFile);
     }
 
     /**
      * {@inheritDoc}
-     *
-     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
-    public function getWarningList($testFile = 'VariableCommentUnitTest.inc')
+    public function getWarningList($testFile='EncodingUtf8UnitTest.inc')
     {
         return [];
     }

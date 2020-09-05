@@ -24,7 +24,7 @@
  * @filesource
  */
 
-namespace PhpCodeQuality\CodingStandard\Test\Commenting;
+namespace PhpCodeQuality\CodingStandard\Test\PhpCodeQuality\Commenting;
 
 use PhpCodeQuality\CodingStandard\Test\AbstractSniffUnitTest;
 
@@ -40,7 +40,7 @@ class FunctionCommentUnitTest extends AbstractSniffUnitTest
      */
     public function getErrorList($testFile = 'FunctionCommentUnitTest.inc')
     {
-        return [
+        $errors = [
             4   => 1,
             9   => 2,
             11  => 1,
@@ -49,6 +49,14 @@ class FunctionCommentUnitTest extends AbstractSniffUnitTest
             14  => 1,
             27  => 1,
         ];
+
+        if (PHP_VERSION_ID >= 70000) {
+            $errors[16] = 3;
+            $errors[50] = 1;
+            $errors[62] = 1;
+        }
+
+        return $errors;
     }
 
     /**

@@ -24,50 +24,34 @@
  * @filesource
  */
 
-namespace PhpCodeQuality\CodingStandard\Test\Strings;
+namespace PhpCodeQuality\CodingStandard\Test\PhpCodeQuality\WhiteSpace;
 
 use PhpCodeQuality\CodingStandard\Test\AbstractSniffUnitTest;
 
 /**
- * Unit test class for the UnnecessaryStringConcat sniff.
- *
- * A sniff unit test checks a .inc file for expected violations of a single
- * coding standard. Expected errors and warnings are stored in this class.
+ * Verifies that the current file contains only valid utf-8 content.
  */
-class UnnecessaryStringConcatUnitTest extends AbstractSniffUnitTest
+class WhitespaceAfterAsteriskUnitTest extends AbstractSniffUnitTest
 {
     /**
      * {@inheritDoc}
      */
-    public function getErrorList($testFile='UnnecessaryStringConcatUnitTest.inc')
+    public function getErrorList($testFile='WhitespaceAfterAsteriskUnitTest.inc')
     {
-        switch ($testFile) {
-        case 'UnnecessaryStringConcatUnitTest.inc':
-            return [
-                    2  => 1,
-                    6  => 1,
-                    9  => 1,
-                    12 => 1,
-                    21 => 4,
-                    24 => 1,
-            ];
-        case 'UnnecessaryStringConcatUnitTest.js':
-            return [
-                    1  => 1,
-                    8  => 1,
-                    11 => 1,
-                    16 => 4,
-                    19 => 1,
-            ];
-        default:
-            return [];
-        }
+        return [
+            4  => 1,
+            8  => 1,
+            21 => 1,
+            26 => 1,
+            32 => 1,
+            38 => 1,
+        ];
     }
 
     /**
      * {@inheritDoc}
      */
-    public function getWarningList($testFile='UnnecessaryStringConcatUnitTest.inc')
+    public function getWarningList($testFile='WhitespaceAfterAsteriskUnitTest.inc')
     {
         return [];
     }

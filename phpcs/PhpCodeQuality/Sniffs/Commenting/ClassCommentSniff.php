@@ -26,6 +26,8 @@
 
 namespace PhpCodeQuality\Sniffs\Commenting;
 
+use PHP_CodeSniffer\Standards\PEAR\Sniffs\Commenting\ClassCommentSniff as CSClassCommentSniffAlias;
+
 /**
  * Parses and verifies the doc comments for classes and interfaces.
  *
@@ -43,7 +45,7 @@ namespace PhpCodeQuality\Sniffs\Commenting;
  *  <li>There is a blank newline between the long description and tags.</li>
  * </ul>
  */
-class ClassCommentSniff extends \PEAR_Sniffs_Commenting_ClassCommentSniff
+class ClassCommentSniff extends CSClassCommentSniffAlias
 {
     /**
      * We do not enforce any tags.

@@ -26,23 +26,26 @@
 
 namespace PhpCodeQuality\Sniffs\Commenting;
 
+use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Standards\Squiz\Sniffs\Commenting\BlockCommentSniff as CSBlockCommentSniff;
+
 /**
  * Verifies that block comments are used appropriately.
  *
  * This alters the check from Squiz_Sniffs_Commenting_BlockCommentSniff to ignore inline doc comments as we want to
  * allow constructs like: "/** @annotation ..." in any doc block.
  */
-class BlockCommentSniff extends \Squiz_Sniffs_Commenting_BlockCommentSniff
+class BlockCommentSniff extends CSBlockCommentSniff
 {
     /**
      * Processes this test, when one of its tokens is encountered
      *
-     * @param \PHP_CodeSniffer_File $phpcsFile The current file being scanned.
-     * @param int                   $stackPtr  The position of the current token in the stack passed in $tokens.
+     * @param File $phpcsFile The current file being scanned.
+     * @param int  $stackPtr  The position of the current token in the stack passed in $tokens.
      *
      * @return void
      */
-    public function process(\PHP_CodeSniffer_File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, $stackPtr)
     {
         $commentEnd = $phpcsFile->findNext(T_DOC_COMMENT_CLOSE_TAG, $stackPtr);
         $content    = $phpcsFile->getTokensAsString($stackPtr, ($commentEnd - $stackPtr));

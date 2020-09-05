@@ -19,39 +19,36 @@
  * @author     Sven Baumann <baumann.sv@gmail.com>
  * @copyright  2006-2015 Squiz Pty Ltd (ABN 77 084 670 600),
  *             2014-2020 Christian Schiffler <c.schiffler@cyberspectrum.de>, Tristan Lins <tristan@lins.io>
- * @link       https://github.com/phpcq/coding-standard
  * @license    https://github.com/phpcq/coding-standard/blob/master/LICENSE.BSD-3-CLAUSE BSD-3-Clause
+ * @link       https://github.com/phpcq/coding-standard
  * @filesource
  */
 
-namespace PhpCodeQuality\CodingStandard\Test\WhiteSpace;
+namespace PhpCodeQuality\CodingStandard\Test\PhpCodeQuality\Commenting;
 
 use PhpCodeQuality\CodingStandard\Test\AbstractSniffUnitTest;
 
 /**
- * Verifies that the current file contains only valid utf-8 content.
+ * Unit test class for ClassCommentSniff.
  */
-class WhitespaceAfterAsteriskUnitTest extends AbstractSniffUnitTest
+class ClassCommentUnitTest extends AbstractSniffUnitTest
 {
     /**
      * {@inheritDoc}
+     *
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
-    public function getErrorList($testFile='WhitespaceAfterAsteriskUnitTest.inc')
+    public function getErrorList($testFile = 'ClassCommentUnitTest.inc')
     {
-        return [
-            4  => 1,
-            8  => 1,
-            21 => 1,
-            26 => 1,
-            32 => 1,
-            38 => 1,
-        ];
+        return [];
     }
 
     /**
      * {@inheritDoc}
+     *
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
-    public function getWarningList($testFile='WhitespaceAfterAsteriskUnitTest.inc')
+    public function getWarningList($testFile = 'ClassCommentUnitTest.inc')
     {
         return [];
     }

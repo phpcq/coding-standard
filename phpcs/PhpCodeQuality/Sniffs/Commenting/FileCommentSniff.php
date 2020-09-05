@@ -25,6 +25,9 @@
 
 namespace PhpCodeQuality\Sniffs\Commenting;
 
+use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Standards\PEAR\Sniffs\Commenting\FileCommentSniff as CSFileCommentSniffAlias;
+
 /**
  * Parses and verifies the doc comments for classes and interfaces.
  *
@@ -42,7 +45,7 @@ namespace PhpCodeQuality\Sniffs\Commenting;
  *  <li>There is a blank newline between the long description and tags.</li>
  * </ul>
  */
-class FileCommentSniff extends \PEAR_Sniffs_Commenting_FileCommentSniff
+class FileCommentSniff extends CSFileCommentSniffAlias
 {
     /**
      * Tags in correct order and related info.
@@ -99,14 +102,14 @@ class FileCommentSniff extends \PEAR_Sniffs_Commenting_FileCommentSniff
     /**
      * Process the package tag.
      *
-     * @param \PHP_CodeSniffer_File $phpcsFile The file being scanned.
-     * @param array                 $tags      The tokens for these tags.
+     * @param File  $phpcsFile The file being scanned.
+     * @param array $tags      The tokens for these tags.
      *
      * @return void
      *
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
-    protected function processPackage(\PHP_CodeSniffer_File $phpcsFile, array $tags)
+    protected function processPackage($phpcsFile, array $tags)
     {
         // No op - we do not check the package name as it should be the same as the github vendor/repository.
         // Sadly we do know neither here.
