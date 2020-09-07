@@ -23,8 +23,8 @@
 namespace PhpCodeQuality\CodingStandard\Test;
 
 use PHP_CodeSniffer\Util\Tokens;
-use PhpCodeQuality\CodingStandard\PHPUnit\CodeSnifferTestSuite56;
-use PhpCodeQuality\CodingStandard\PHPUnit\CodeSnifferTestSuite7x;
+use PhpCodeQuality\CodingStandard\PHPUnit\CodeSnifferTestSuiteForPhpLT7;
+use PhpCodeQuality\CodingStandard\PHPUnit\CodeSnifferTestSuiteForPhpGTE7;
 
 if (defined('PHP_CODESNIFFER_IN_TESTS') === false) {
     define('PHP_CODESNIFFER_IN_TESTS', true);
@@ -43,7 +43,7 @@ include_once \dirname(\dirname(__DIR__)) . '/vendor/squizlabs/php_codesniffer/au
 $tokens = new Tokens();
 
 if (PHP_VERSION_ID >= 70100) {
-    class CodeSnifferTestSuite extends CodeSnifferTestSuite7x {}
+    class CodeSnifferTestSuiteForPhpGTE extends CodeSnifferTestSuiteForPhpGTE7 {}
 } else {
-    class CodeSnifferTestSuite extends CodeSnifferTestSuite56 {}
+    class CodeSnifferTestSuiteForPHP extends CodeSnifferTestSuiteForPhpLT7 {}
 }

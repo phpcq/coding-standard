@@ -25,15 +25,9 @@
 
 namespace PhpCodeQuality\CodingStandard\Test;
 
-use PhpCodeQuality\CodingStandard\PHPUnit\AbstractSniffUnitTestForPhpunitGTE8;
-use PhpCodeQuality\CodingStandard\PHPUnit\AbstractSniffUnitTestForPhpunitLT8;
-use PHPUnit\Runner\Version;
-
-$version = (\class_exists(Version::class)) ? Version::id() : \PHPUnit_Runner_Version::id();
-
-if (\version_compare($version, '8.0.0', '>=')) {
-    abstract class AbstractSniffUnitTest extends AbstractSniffUnitTestForPhpunitGTE8 {}
-} else {
-    abstract class AbstractSniffUnitTest extends AbstractSniffUnitTestForPhpunitLT8 {}
+/**
+ * This is a dummy for the autoload validation.
+ */
+class DummyAutoloadValidation
+{
 }
-

@@ -23,13 +23,11 @@
 namespace PhpCodeQuality\CodingStandard\PHPUnit;
 
 use PHPUnit\Framework\Test;
-use PHPUnit\Framework\TestResult;
-use PHPUnit\TextUI\TestRunner;
 
 /**
  * A test class for running all CodeSniffer related unit tests.
  */
-class CodeSnifferTestSuite7x extends AbstractCodeSnifferTestSuite implements Test
+class CodeSnifferTestSuiteForPhpLT7 extends AbstractCodeSnifferTestSuite implements Test
 {
     /**
      * Prepare the test runner.
@@ -38,14 +36,15 @@ class CodeSnifferTestSuite7x extends AbstractCodeSnifferTestSuite implements Tes
      */
     public static function main()
     {
-        TestRunner::run(self::suite());
+        \PHPUnit_TextUI_TestRunner::run(self::suite());
 
     }//end main()
     /**
      * {@inheritDoc}
      */
-    public function run(TestResult $result = null): TestResult
+    public function run(\PHPUnit_Framework_TestResult $result = null)
     {
-        return $result ?? new TestResult();
+        return (null !== $result) ? $result : new \PHPUnit_Framework_TestResult();
     }
 }
+
