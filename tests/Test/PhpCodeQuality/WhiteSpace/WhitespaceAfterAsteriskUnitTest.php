@@ -4,7 +4,7 @@
  * This file is part of phpcq/coding-standard.
  *
  * (c) 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600),
- *     2014-2015 Christian Schiffler, Tristan Lins
+ *     2014-2020 Christian Schiffler, Tristan Lins
  *
  * For the full copyright and license information, please view the LICENSE.BSD-3-CLAUSE
  * file that was distributed with this source code.
@@ -16,42 +16,43 @@
  * @author     Marc McIntyre <mmcintyre@squiz.net>
  * @author     Christian Schiffler <c.schiffler@cyberspectrum.de>
  * @author     Tristan Lins <tristan@lins.io>
+ * @author     Sven Baumann <baumann.sv@gmail.com>
  * @copyright  2006-2015 Squiz Pty Ltd (ABN 77 084 670 600),
- *             2014-2015 Christian Schiffler <c.schiffler@cyberspectrum.de>, Tristan Lins <tristan@lins.io>
+ *             2014-2020 Christian Schiffler <c.schiffler@cyberspectrum.de>, Tristan Lins <tristan@lins.io>
  * @link       https://github.com/phpcq/coding-standard
  * @license    https://github.com/phpcq/coding-standard/blob/master/LICENSE.BSD-3-CLAUSE BSD-3-Clause
  * @filesource
  */
 
+namespace PhpCodeQuality\CodingStandard\Test\PhpCodeQuality\WhiteSpace;
+
+use PhpCodeQuality\CodingStandard\Test\AbstractSniffUnitTest;
+
 /**
  * Verifies that the current file contains only valid utf-8 content.
  */
-class PhpCodeQuality_Tests_Files_EncodingUtf8UnitTest extends PhpCodeQuality_Tests_AbstractSniffUnitTest
+class WhitespaceAfterAsteriskUnitTest extends AbstractSniffUnitTest
 {
     /**
      * {@inheritDoc}
      */
-    public function getErrorList($testFile='EncodingUtf8UnitTest.inc')
+    public function getErrorList($testFile='WhitespaceAfterAsteriskUnitTest.inc')
     {
-        $testFile = func_get_arg(0);
-        $parts    = explode('.', $testFile);
-
-        switch ($parts[1]) {
-            case 'UTF-8':
-                return array();
-            case 'ISO-8859-1':
-                return array(1 => 1);
-            default:
-        }
-
-        throw new \RuntimeException('Unknown sniff test fixture encountered: ' . $testFile);
+        return [
+            4  => 1,
+            8  => 1,
+            21 => 1,
+            26 => 1,
+            32 => 1,
+            38 => 1,
+        ];
     }
 
     /**
      * {@inheritDoc}
      */
-    public function getWarningList($testFile='EncodingUtf8UnitTest.inc')
+    public function getWarningList($testFile='WhitespaceAfterAsteriskUnitTest.inc')
     {
-        return array();
+        return [];
     }
 }

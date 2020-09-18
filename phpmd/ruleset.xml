@@ -29,14 +29,15 @@
 
   <rule name="ExcessiveClassComplexity"
         since="0.2.5"
-        class="PHP_PMD_Rule_Design_WeightedMethodCount"
+        class="PHPMD\Rule\Design\WeightedMethodCount"
         message="The class {0} has an overall complexity of {1} which is very high. The configured complexity threshold is {2}."
-        externalInfoUrl="http://phpmd.org/rules/codesize.html#excessiveclasscomplexity">
+        externalInfoUrl="https://phpmd.org/rules/codesize.html#excessiveclasscomplexity">
     <description>
       <![CDATA[
-The WMC of a class is a good indicator of how much time and effort is required
-to modify and maintain this class. A large number of methods also means that
-this class has a greater potential impact on derived classes.
+The Weighted Method Count (WMC) of a class is a good indicator of how much time
+and effort is required to modify and maintain this class. The WMC metric is defined
+as the sum of complexities of all methods declared in a class. A large number of
+methods also means that this class has a greater potential impact on derived classes.
             ]]>
     </description>
     <priority>3</priority>
@@ -46,29 +47,30 @@ this class has a greater potential impact on derived classes.
     <example>
       <![CDATA[
 class Foo {
-	public function bar()  {
-		if ($a == $b)  {
-			if ($a1 == $b1) {
-				fiddle();
-			} else if ($a2 == $b2) {
-				fiddle();
-			}  else {
-			}
-		}
-	}
-	public function baz()  {
-		if ($a == $b)  {
-			if ($a1 == $b1) {
-				fiddle();
-			} else if ($a2 == $b2) {
-				fiddle();
-			}  else {
-			}
-		}
-	}
-	// Several other complex methods
+    public function bar() {
+        if ($a == $b)  {
+            if ($a1 == $b1) {
+                fiddle();
+            } elseif ($a2 == $b2) {
+                fiddle();
+            } else {
+            }
+        }
+    }
+    public function baz() {
+        if ($a == $b) {
+            if ($a1 == $b1) {
+                fiddle();
+            } elseif ($a2 == $b2) {
+                fiddle();
+            } else {
+            }
+        }
+    }
+    // Several other complex methods
 }
             ]]>
     </example>
   </rule>
+
 </ruleset>

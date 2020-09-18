@@ -3,7 +3,7 @@
 /**
  * This file is part of phpcq/coding-standard.
  *
- * (c) 2014 Christian Schiffler, Tristan Lins
+ * (c) 2014-2020 Christian Schiffler, Tristan Lins
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -13,25 +13,26 @@
  * @package    phpcq/coding-standard
  * @author     Christian Schiffler <c.schiffler@cyberspectrum.de>
  * @author     Tristan Lins <tristan@lins.io>
- * @copyright  2014-2015 Christian Schiffler <c.schiffler@cyberspectrum.de>, Tristan Lins <tristan@lins.io>
+ * @author     Sven Baumann <baumann.sv@gmail.com>
+ * @copyright  2014-2020 Christian Schiffler <c.schiffler@cyberspectrum.de>, Tristan Lins <tristan@lins.io>
  * @license    https://github.com/phpcq/coding-standard/blob/master/LICENSE.MIT MIT
  * @link       https://github.com/phpcq/coding-standard
  * @filesource
  */
 
+namespace PhpCodeQuality\CodingStandard\PHPUnit;
+
 /**
  * This class is for backwards compatibility only.
  */
-// @codingStandardsIgnoreStart
-class RecursiveCallbackFilterIterator extends RecursiveFilterIterator
-// @codingStandardsIgnoreEnd
+class RecursiveCallbackFilterIterator extends \RecursiveFilterIterator
 {
     private $callback;
 
     /**
      * {@inheritDoc}
      */
-    public function __construct(RecursiveIterator $iterator, $callback)
+    public function __construct(\RecursiveIterator $iterator, $callback)
     {
         $this->callback = $callback;
         parent::__construct($iterator);

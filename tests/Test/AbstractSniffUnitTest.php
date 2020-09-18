@@ -18,37 +18,22 @@
  * @author     Tristan Lins <tristan@lins.io>
  * @copyright  2006-2015 Squiz Pty Ltd (ABN 77 084 670 600),
  *             2014-2015 Christian Schiffler <c.schiffler@cyberspectrum.de>, Tristan Lins <tristan@lins.io>
- * @link       https://github.com/phpcq/coding-standard
  * @license    https://github.com/phpcq/coding-standard/blob/master/LICENSE.BSD-3-CLAUSE BSD-3-Clause
+ * @link       https://github.com/phpcq/coding-standard
  * @filesource
  */
 
-/**
- * Verifies that the current file contains only valid utf-8 content.
- */
-class PhpCodeQuality_Tests_WhiteSpace_WhitespaceAfterAsteriskUnitTest extends PhpCodeQuality_Tests_AbstractSniffUnitTest
-{
-    /**
-     * {@inheritDoc}
-     */
-    public function getErrorList($testFile='WhitespaceAfterAsteriskUnitTest.inc')
-    {
-        return array(
-            4  => 1,
-            8  => 1,
-            21 => 1,
-            26 => 1,
-            32 => 1,
-            38 => 1,
-        );
-    }
+namespace PhpCodeQuality\CodingStandard\Test;
 
-    /**
-     * {@inheritDoc}
-     */
-    public function getWarningList($testFile='WhitespaceAfterAsteriskUnitTest.inc')
-    {
-        return array();
+use PhpCodeQuality\CodingStandard\PHPUnit\AbstractSniffUnitTestForPhpunitGTE8;
+use PhpCodeQuality\CodingStandard\PHPUnit\AbstractSniffUnitTestForPhpunitLT8;
+use PHPUnit\Runner\Version;
 
-    }
+$version = (\class_exists(Version::class)) ? Version::id() : \PHPUnit_Runner_Version::id();
+
+if (\version_compare($version, '8.0.0', '>=')) {
+    abstract class AbstractSniffUnitTest extends AbstractSniffUnitTestForPhpunitGTE8 {}
+} else {
+    abstract class AbstractSniffUnitTest extends AbstractSniffUnitTestForPhpunitLT8 {}
 }
+

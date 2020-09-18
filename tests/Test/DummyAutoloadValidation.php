@@ -23,29 +23,11 @@
  * @filesource
  */
 
+namespace PhpCodeQuality\CodingStandard\Test;
+
 /**
- * Unit test class for ClassCommentSniff.
+ * This is a dummy for the autoload validation.
  */
-class PhpCodeQuality_Tests_Commenting_ClassCommentUnitTest extends PhpCodeQuality_Tests_AbstractSniffUnitTest
+class DummyAutoloadValidation
 {
-    /**
-     * {@inheritDoc}
-     *
-     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
-     */
-    public function getErrorList($testFile = 'ClassCommentUnitTest.inc')
-    {
-        return array();
-    }
-
-    /**
-     * {@inheritDoc}
-     *
-     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
-     */
-    public function getWarningList($testFile = 'ClassCommentUnitTest.inc')
-    {
-        return array();
-
-    }
 }
