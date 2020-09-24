@@ -83,7 +83,7 @@ class ValidDefaultStatementsInSwitchesSniff implements Sniff
         $nextDefaultID = $phpcsFile->findNext(T_DEFAULT, $stackPtr + 1);
         $nextDefault = $tokens[$nextDefaultID];
         if (\array_key_exists($stackPtr, $nextDefault['conditions']) === FALSE) {
-            $phpcsFile->addError('Expect one default case in the switch statement; but found zero.', $stackPtr);
+            $phpcsFile->addError('Expect one default case in the switch statement; but found zero.', $stackPtr, 'NotFound');
         }
     }
 }
